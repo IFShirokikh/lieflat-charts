@@ -75,7 +75,9 @@ Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化 skill，可
 
 [打开 Force Graph 模板体验拖拽与缩放](https://larashero3-dotcom.github.io/lieflat-charts/templates/big-force.html)
 
-### 彩色模式
+## 最新更新 2026.8.6
+
+### 增加了彩色模式
 
 图表的默认色彩是黑白灰单色，但也有三种不同色系的预设模板。若用户明确需要颜色，或颜色本身承载真实数据维度，初稿会生成一套预设的彩色模板，保证配色关系稳定。三套预设不是锁死的色板：生成后可以继续调整色值；调整时需重新检查对比度、视觉主次和颜色所表达的数据含义。
 
