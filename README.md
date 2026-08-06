@@ -1,5 +1,7 @@
 # Lieflat Charts
 
+中文 | [English](README.en.md)
+
 Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 moxt.ai 制作，专注于把数据图表做成有编辑感、能阅读、能组成完整页面的视觉内容。
 
 它以统一的 Mono 灰阶、字体、留白、线条和动效建立自己的视觉语法，包括以下几种视觉风格：
@@ -219,6 +221,8 @@ catalog.md 和 mono-tokens.js 是否存在。
 
 ```text
 .
+├── README.md                # 中文项目说明
+├── README.en.md             # English project guide
 ├── SKILL.md                 # Agent 使用的工作流与规则
 ├── catalog.md               # 48 个图型的数据契约索引
 ├── mono-tokens.js           # 共享视觉 token
