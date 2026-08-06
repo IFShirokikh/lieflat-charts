@@ -5,7 +5,7 @@ description: 一套模板驱动、默认 Mono 的数据可视化 skill，严格�
 
 # Lieflat Charts — 图表品味法典
 
-Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化 skill，默认使用 Mono 灰阶，专注于把数据图表做成有编辑感、能阅读、能组成完整页面的视觉内容。本 skill 在 moxt.ai 制作，支持 Lupi 编辑叙事型、Glance 快速判断型、Basics 基础编辑型和 Interactive 交互大图。用户给你数据和场合，你产出一个无需构建、双击可打开的单文件 HTML，改数据只需要动顶部一个数组。纯 SVG 图可离线运行；使用 Chart.js、ECharts 或在线字体的图，在未内联依赖时需要联网。**默认必须先从 Lupi Editorial 和 Lupi Basics 中选型；只有两者都没有合适模板，或用户明确要求 Glance / dashboard / 三秒快读时，才允许使用 Glance。**
+Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化 skill，默认使用 Mono 灰阶，专注于把数据图表做成有编辑感、能阅读、能组成完整页面的视觉内容。本 skill 在 [moxt.ai](https://moxt.ai) 制作，支持 Lupi 编辑叙事型、Glance 快速判断型、Basics 基础编辑型和 Interactive 交互大图。用户给你数据和场合，你产出一个无需构建、双击可打开的单文件 HTML，改数据只需要动顶部一个数组。纯 SVG 图可离线运行；使用 Chart.js、ECharts 或在线字体的图，在未内联依赖时需要联网。**默认必须先从 Lupi Editorial 和 Lupi Basics 中选型；只有两者都没有合适模板，或用户明确要求 Glance / dashboard / 三秒快读时，才允许使用 Glance。**
 
 彩色默认不用；需要时从 `color-presets.js` 的内置方案起步，换肤样张在 `templates/color/`，后续调色规则在第六点五节。
 
