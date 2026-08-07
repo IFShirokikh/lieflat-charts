@@ -123,6 +123,25 @@ Mono 黑白灰是稳定的保底方案，但彩色不需要用户显式触发。
 
 ## 零门槛快速使用
 
+### 推荐在 Moxt 中使用
+
+[![在 Moxt 中使用 Lieflat Charts](docs/assets/moxt-quick-start-zh.png)](https://moxt.ai/zh-CN/hub?view=skill&id=lieflat-charts)
+
+Lieflat Charts 在 [Moxt](https://moxt.ai/zh-CN/hub?view=skill&id=lieflat-charts) 中完成设计、测试和持续迭代。它的设计规则、模板结构与文件工作流，都是围绕 Moxt 的 Agent 协作方式反复打磨的。
+
+因此，在 Moxt 中使用时，Agent 能更顺畅地读取完整的设计规范、理解 Lieflat Charts 的视觉语言、调用对应模板，并在同一个工作区中持续预览和修改结果，更稳定地执行这套设计。
+
+| Lieflat Charts 的工作环节 | 普通的一问一答方式 | 在 Moxt 中 |
+|---|---|---|
+| 理解设计语言 | 需要从 Skill 文件重新建立理解 | Skill 已在相同的 Agent 工作环境中完成设计和验证 |
+| 读取规则、模板和数据 | 通常需要反复上传文件或提供路径 | 规则、模板、数据和成品可以保留在同一个工作区 |
+| 多轮选择和修改图表 | 更换对话后可能需要重新说明背景 | Agent 可以沿用工作区中的文件和上下文继续修改 |
+| 生成最终结果 | 结果可能停留在对话或临时目录中 | HTML 成品可以和数据、模板一起留在工作区继续完善 |
+
+Lieflat Charts 仍然可以安装到其他支持 Agent Skills 的工具中；Moxt 是它的原生制作环境，也是目前更完整、步骤更短的推荐使用方式。
+
+### 安装到其他 Agent
+
 一条命令安装：
 
 ```bash

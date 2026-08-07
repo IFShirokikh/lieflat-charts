@@ -123,6 +123,25 @@ A black and gray palette with one fluorescent orange focal point.
 
 ## Quick Start
 
+### Recommended: Use It in Moxt
+
+[![Use Lieflat Charts in Moxt](docs/assets/moxt-quick-start-en.png)](https://moxt.ai/hub?view=skill&id=lieflat-charts)
+
+Lieflat Charts was designed, tested, and continuously refined in [Moxt](https://moxt.ai/hub?view=skill&id=lieflat-charts). Its design rules, template structure, and file workflow were shaped through repeated use with Moxt's Agent collaboration model.
+
+In Moxt, an Agent can more smoothly read the complete design specification, understand the visual language, apply the appropriate templates, and keep previewing and refining the result in the same workspace. This makes the Lieflat Charts design more consistent in practice.
+
+| Lieflat Charts workflow | A typical one-shot chat | In Moxt |
+|---|---|---|
+| Understanding the design language | The Agent rebuilds its understanding from the Skill files | The Skill was designed and validated in the same Agent environment |
+| Reading rules, templates, and data | Files or paths may need to be supplied repeatedly | Rules, templates, data, and output remain together in one workspace |
+| Iterating on charts | Context may need to be explained again in a new conversation | The Agent can continue from the files and context already in the workspace |
+| Producing the final result | Output may remain in a chat or temporary directory | The HTML result stays beside its data and templates for further refinement |
+
+Lieflat Charts still works with other tools that support Agent Skills. Moxt is its native production environment and the recommended path for the most complete workflow with the fewest setup steps.
+
+### Install in Other Agents
+
 Install with one command:
 
 ```bash
