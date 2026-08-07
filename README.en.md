@@ -14,7 +14,7 @@ Its visual language is built around consistent typography, spacing, line work, a
 
 The skill also includes standalone interactive visualizations for networks, paths, and dense multi-segment flows. Each chart aims to preserve honest data units while treating headlines, annotations, sources, and page structure as part of the visualization.
 
-Mono is the reliable fallback, but color does not require an explicit user request. The agent can choose automatically between Mono, Porcelain, Palm, and Wire based on the data structure and publishing context; when the fit is unclear, it returns to Mono. One HTML file or chart set uses one color system only, with no mixing between preset families. Colors can still be refined within the selected family while preserving structure, contrast, and data meaning.
+Mono is the reliable fallback, but color does not require an explicit user request. The agent can choose automatically between Mono, Porcelain, Palm, and Wire based on the data structure and publishing context; when the fit is unclear, it returns to Mono. When users provide brand colors or exact values, the skill can build one custom palette. One HTML file or chart set uses one color system only while preserving structure, contrast, and data meaning.
 
 ## Preview
 
@@ -83,7 +83,7 @@ Motion preview:
 
 ### Added Color Mode
 
-The skill can automatically choose Mono or one color preset from the data structure and publishing context; users do not need to request color first. Porcelain suits ordered or single-series data, Palm suits a small number of unordered categories, and Wire suits a restrained composition with one focal point. When the fit is unclear, the skill returns to Mono. Each HTML file or chart set uses one color system only, and preset families cannot be mixed. Colors can still be refined within the selected family, with contrast, visual hierarchy, and data meaning checked again after each change.
+The skill can automatically choose Mono or one color preset from the data structure and publishing context; users do not need to request color first. Porcelain suits ordered or single-series data, Palm suits a small number of unordered categories, and Wire suits a restrained composition with one focal point. When the fit is unclear, the skill returns to Mono. Users who provide brand colors or exact values can use one custom palette. Each HTML file or chart set still locks one color system, with contrast, hierarchy, and data meaning checked after every change.
 
 #### Porcelain
 
@@ -217,7 +217,7 @@ The number of charts follows the number of independent findings: one chart for o
 | Family | Count | Best for | Implementation |
 |---|---:|---|---|
 | **Lupi Editorial** | 15 | Annual reports, papers, long-form articles, posters, portfolios, and readers willing to inspect detail | Handwritten SVG |
-| **Lupi Basics** | 12 | Bars, lines, areas, donuts, scatterplots, waterfalls, heatmaps, progress, and other foundational data shapes | Handwritten SVG |
+| **Lupi Basics** | 13 | Bars, lines, areas, donuts, scatterplots, waterfalls, heatmaps, progress, treemaps, and other foundational data shapes | Handwritten SVG / ECharts |
 | **Glance** | 18 | Weekly reports, dashboards, monitoring, and presentations that require fast comparison | Chart.js / ECharts |
 | **Interactive** | 3 | Networks, paths, multi-segment flows, and high-density relationship data | ECharts / SVG |
 | **Color Presets** | 3 families / 15 samples | Distinguishing real data dimensions or adding one controlled focal point to monochrome charts | Restyled original templates |
@@ -228,7 +228,7 @@ Each point, line, and annotation should map to a real unit whenever possible. Lu
 
 ### Lupi Basics
 
-Lupi Basics retains familiar chart silhouettes while rebuilding them inside the same editorial language. A cell can represent one percentage point, a tick can represent one person, and a hairline can represent one day. It is suited to smaller datasets that still need density and countable visual units.
+Lupi Basics retains familiar chart silhouettes while rebuilding them inside the same editorial language. A cell can represent one percentage point, a tick can represent one person, a hairline can represent one day, and a treemap rectangle can represent one honest weight. It is suited to smaller datasets that still need density and countable visual units.
 
 ### Glance
 
@@ -240,7 +240,7 @@ Interactive templates handle relationship data that ordinary static charts canno
 
 ## Design
 
-Every family shares the same core visual language: paper gray and charcoal at the extremes, a controlled grayscale ladder between them, and data encoded through lightness, position, length, density, and structure. The three color presets provide stable starting points. When users refine the palette, contrast, hierarchy, and data meaning still need to remain clear.
+Every family shares the same core visual language: paper gray and charcoal at the extremes, a controlled grayscale ladder between them, and data encoded through lightness, position, length, density, and structure. The three color presets provide stable starting points. Explicit brand colors can also become one role-based custom palette. When users refine the palette, contrast, hierarchy, and data meaning still need to remain clear.
 
 Lieflat Charts differs from a conventional chart generator in more than color:
 
@@ -257,7 +257,7 @@ Lieflat Charts differs from a conventional chart generator in more than color:
 ├── README.md                # Chinese project guide
 ├── README.en.md             # English project guide
 ├── SKILL.md                 # Agent workflow and design rules
-├── catalog.md               # Data-contract index for 48 chart types
+├── catalog.md               # Data-contract index for 49 chart types
 ├── mono-tokens.js           # Shared monochrome design tokens
 ├── color-presets.js         # Three built-in color presets
 ├── templates/               # Lupi, Basics, Glance, and interactive templates
@@ -267,7 +267,7 @@ Lieflat Charts differs from a conventional chart generator in more than color:
 └── scripts/validate.mjs     # Pre-release validation
 ```
 
-Open the HTML files under `templates/` directly to inspect the galleries. Lupi and Basics mainly use native SVG. Glance, Circular, and Force templates load Chart.js or ECharts from a CDN and require an internet connection unless those dependencies are inlined.
+Open the HTML files under `templates/` directly to inspect the galleries. Lupi and Basics mainly use native SVG, while F13 Treemap uses ECharts. Glance, Circular, and Force templates also load Chart.js or ECharts from a CDN and require an internet connection unless those dependencies are inlined.
 
 ## License
 

@@ -1,4 +1,4 @@
-# Lieflat Charts 图型目录 · 48 张
+# Lieflat Charts 图型目录 · 49 张
 
 > 每张图挂三个标签：**数据形状**（选图的主键）、**场合**、**读者时间**。
 > **选型优先级以 `SKILL.md` 的硬约束为准：默认先完整审计 Lupi Editorial，再审计 Lupi Basics；只有两组都不适配，或用户明确要求 Glance / dashboard / 三秒快读时，才进入 Glance。**
@@ -52,7 +52,7 @@
 
 > L14–L15 是**小数据组**：数据只有几个百分比时靠单位分解拿回 Lupi 密度——1 点 = 1 人 / 1 百分点，密度来自单位而不是记录数。单位含义必须写进副标题（如 "one dot = one person in a hundred"），且只摊诚实单位，不编造个体。
 
-## 基础型组 · 12 张（F1–F12 · Lupi 语法 × 基础图型剪影，为稀疏数据而设）
+## 基础型组 · 13 张（F1–F13 · Lupi 语法 × 基础图型剪影，为稀疏数据而设）
 
 远看认得出基础图型（柱/折线/环形…），近看每个单位可数。数据只有几个类目或几十天时的 Lupi 首选——先来这里找，找不到再走库外翻译。参考实现 `templates/basics-gallery.html`。
 
@@ -70,6 +70,7 @@
 | F10 | Dot Heat | When support gets loud | 星期×小时×量（小热力） | 支持/运维 | ~30s | SVG | G14 Single Axis |
 | F11 | Tick Gauge | How far to the quarter's goal | 单值进度（0–100%） | 汇报开场 | <10s | SVG | G18 Draw-in + Counter |
 | F12 | Dumbbell Queue | Onboarding, before and after | 类目级前后对比（≤6 类，串珠=真单位） | 年报/复盘 | ~30s | SVG | —（两点趋势的 Lupi 位，替代已删 Slope Beads） |
+| F13 | Nested Treemap | Where the work went | 两层层级 + 正数权重，矩形面积=数值 | 预算/产品组合/空间占用 | ~30s | ECharts（SVG） | G7 Tree LR（只看从属关系、不看份额时） |
 
 ## 独立交互大图 · 3 张（一图一文件，整页幅面）
 

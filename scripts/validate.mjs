@@ -36,6 +36,12 @@ const required = [
 const failures = [];
 const htmlFiles = [];
 const ignoredDirectories = new Set(['.git', '.playwright-cli', 'node_modules', 'output']);
+const treemapTemplates = [
+  'templates/basics-gallery.html',
+  'templates/color/basics-porcelain.html',
+  'templates/color/basics-palm.html',
+  'templates/color/basics-wire.html',
+];
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -84,6 +90,23 @@ function collectPresetChannels(value, channels = new Set()) {
 
 for (const file of required) {
   if (!fs.existsSync(path.join(root, file))) failures.push(`缺少发布文件：${file}`);
+}
+
+for (const file of treemapTemplates) {
+  const full = path.join(root, file);
+  if (!fs.existsSync(full)) continue;
+  const source = fs.readFileSync(full, 'utf8');
+  if (!source.includes('id="treemap"')) failures.push(`${file} 缺少 F13 treemap 容器`);
+  if (!source.includes("type:'treemap'")) failures.push(`${file} 缺少 F13 treemap 渲染代码`);
+  if (!source.includes('F1–F13')) failures.push(`${file} 的 Basics 编号未更新为 F1–F13`);
+}
+
+const catalogSource = fs.readFileSync(path.join(root, 'catalog.md'), 'utf8');
+if (!catalogSource.includes('| F13 | Nested Treemap |')) failures.push('catalog.md 缺少 F13 Nested Treemap');
+
+const skillSource = fs.readFileSync(path.join(root, 'SKILL.md'), 'utf8');
+for (const role of ['`BG`', '`TXT`', '`MUT`', '`GRID`', '`DATA`']) {
+  if (!skillSource.includes(role)) failures.push(`SKILL.md 的 custom 色板规则缺少角色 ${role}`);
 }
 
 const presetChannels = new Map();
