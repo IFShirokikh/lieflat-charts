@@ -91,6 +91,8 @@ A single-hue blue scale for ordered data and single-series charts.
 
 <p align="center"><img src="docs/assets/color-porcelain-motion.gif" alt="Porcelain Barcode Lollipop motion preview" width="100%"></p>
 
+<p align="center"><img src="docs/assets/color-porcelain-almanac-motion.gif" alt="Porcelain Eight Years of Tickets, One Almanac motion preview" width="100%"></p>
+
 <table>
   <tr>
     <td width="50%"><img src="docs/assets/preview-color-porcelain-basics.png" alt="Porcelain Basics color preview" width="100%"><br><strong>Basics</strong></td>
@@ -103,7 +105,9 @@ A single-hue blue scale for ordered data and single-series charts.
 
 A low-saturation green and yellow family for a small number of unordered categories.
 
-<p align="center"><img src="docs/assets/color-palm-motion.gif" alt="Palm Dot Heat motion preview" width="100%"></p>
+<p align="center"><img src="docs/assets/color-palm-wave-motion.gif" alt="Palm Fifty Markets, One Wave motion preview" width="100%"></p>
+
+<p align="center"><img src="docs/assets/color-palm-support-motion.gif" alt="Palm Support Load, Day by Day motion preview" width="100%"></p>
 
 <table>
   <tr>
@@ -117,7 +121,9 @@ A low-saturation green and yellow family for a small number of unordered categor
 
 A black and gray palette with one fluorescent orange focal point.
 
-<p align="center"><img src="docs/assets/color-wire-motion.gif" alt="Wire Draw-in and Counter motion preview" width="100%"></p>
+<p align="center"><img src="docs/assets/color-wire-patchwork-motion.gif" alt="Wire A Quarter of Deploys, Overlaid motion preview" width="100%"></p>
+
+<p align="center"><img src="docs/assets/color-wire-hourglass-motion.gif" alt="Wire The Funnel, Poured motion preview" width="100%"></p>
 
 <table>
   <tr>

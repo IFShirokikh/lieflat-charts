@@ -91,6 +91,8 @@ Mono 黑白灰是稳定的保底方案，但彩色不需要用户显式触发。
 
 <p align="center"><img src="docs/assets/color-porcelain-motion.gif" alt="青瓷蓝 Barcode Lollipop 动态预览" width="100%"></p>
 
+<p align="center"><img src="docs/assets/color-porcelain-almanac-motion.gif" alt="青瓷蓝 Eight Years of Tickets, One Almanac 动态预览" width="100%"></p>
+
 <table>
   <tr>
     <td width="50%"><img src="docs/assets/preview-color-porcelain-basics.png" alt="青瓷蓝 Basics 彩色图表预览" width="100%"><br><strong>Basics</strong></td>
@@ -103,7 +105,9 @@ Mono 黑白灰是稳定的保底方案，但彩色不需要用户显式触发。
 
 低饱和绿黄色系，用色相区分少量无序类目。
 
-<p align="center"><img src="docs/assets/color-palm-motion.gif" alt="椰林绿 Dot Heat 动态预览" width="100%"></p>
+<p align="center"><img src="docs/assets/color-palm-wave-motion.gif" alt="椰林绿 Fifty Markets, One Wave 动态预览" width="100%"></p>
+
+<p align="center"><img src="docs/assets/color-palm-support-motion.gif" alt="椰林绿 Support Load, Day by Day 动态预览" width="100%"></p>
 
 <table>
   <tr>
@@ -117,7 +121,9 @@ Mono 黑白灰是稳定的保底方案，但彩色不需要用户显式触发。
 
 黑灰阶加一个荧光橙视线落点。
 
-<p align="center"><img src="docs/assets/color-wire-motion.gif" alt="编辑部红 Draw-in and Counter 动态预览" width="100%"></p>
+<p align="center"><img src="docs/assets/color-wire-patchwork-motion.gif" alt="编辑部红 A Quarter of Deploys, Overlaid 动态预览" width="100%"></p>
+
+<p align="center"><img src="docs/assets/color-wire-hourglass-motion.gif" alt="编辑部红 The Funnel, Poured 动态预览" width="100%"></p>
 
 <table>
   <tr>
