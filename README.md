@@ -89,6 +89,8 @@ Mono 黑白灰是稳定的保底方案，但彩色不需要用户显式触发。
 
 单色相明度阶，适合有序数据和单序列。
 
+<p align="center"><img src="docs/assets/color-porcelain-motion.gif" alt="青瓷蓝 Barcode Lollipop 动态预览" width="100%"></p>
+
 <table>
   <tr>
     <td width="50%"><img src="docs/assets/preview-color-porcelain-basics.png" alt="青瓷蓝 Basics 彩色图表预览" width="100%"><br><strong>Basics</strong></td>
@@ -101,6 +103,8 @@ Mono 黑白灰是稳定的保底方案，但彩色不需要用户显式触发。
 
 低饱和绿黄色系，用色相区分少量无序类目。
 
+<p align="center"><img src="docs/assets/color-palm-motion.gif" alt="椰林绿 Dot Heat 动态预览" width="100%"></p>
+
 <table>
   <tr>
     <td width="50%"><img src="docs/assets/preview-color-palm-basics.png" alt="椰林绿 Basics 彩色图表预览" width="100%"><br><strong>Basics</strong></td>
@@ -112,6 +116,8 @@ Mono 黑白灰是稳定的保底方案，但彩色不需要用户显式触发。
 #### Wire · 编辑部红
 
 黑灰阶加一个荧光橙视线落点。
+
+<p align="center"><img src="docs/assets/color-wire-motion.gif" alt="编辑部红 Draw-in and Counter 动态预览" width="100%"></p>
 
 <table>
   <tr>

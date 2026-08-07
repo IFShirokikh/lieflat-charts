@@ -89,6 +89,8 @@ The skill can automatically choose Mono or one color preset from the data struct
 
 A single-hue blue scale for ordered data and single-series charts.
 
+<p align="center"><img src="docs/assets/color-porcelain-motion.gif" alt="Porcelain Barcode Lollipop motion preview" width="100%"></p>
+
 <table>
   <tr>
     <td width="50%"><img src="docs/assets/preview-color-porcelain-basics.png" alt="Porcelain Basics color preview" width="100%"><br><strong>Basics</strong></td>
@@ -101,6 +103,8 @@ A single-hue blue scale for ordered data and single-series charts.
 
 A low-saturation green and yellow family for a small number of unordered categories.
 
+<p align="center"><img src="docs/assets/color-palm-motion.gif" alt="Palm Dot Heat motion preview" width="100%"></p>
+
 <table>
   <tr>
     <td width="50%"><img src="docs/assets/preview-color-palm-basics.png" alt="Palm Basics color preview" width="100%"><br><strong>Basics</strong></td>
@@ -112,6 +116,8 @@ A low-saturation green and yellow family for a small number of unordered categor
 #### Wire
 
 A black and gray palette with one fluorescent orange focal point.
+
+<p align="center"><img src="docs/assets/color-wire-motion.gif" alt="Wire Draw-in and Counter motion preview" width="100%"></p>
 
 <table>
   <tr>
