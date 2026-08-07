@@ -2,6 +2,8 @@
 
 中文 | [English](README.en.md)
 
+[![Lieflat Charts：以统一的字体、留白、线条和动效建立自己的视觉语法的数据可视化 skill](docs/assets/readme-hero-zh.png)](https://moxt.ai/zh-CN/hub?view=skill&id=lieflat-charts)
+
 Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 [moxt.ai](https://moxt.ai) 制作，专注于把数据图表做成有编辑感、能阅读、能组成完整页面的视觉内容。
 
 它以统一的 Mono 灰阶、字体、留白、线条和动效建立自己的视觉语法，包括以下几种视觉风格：
