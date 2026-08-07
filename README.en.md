@@ -6,7 +6,7 @@
 
 Lieflat Charts is an Agent Skills-compatible data visualization skill for moxt, Claude Code, Codex, and other AI agents that support `SKILL.md`. Created at [moxt.ai](https://moxt.ai), it turns datasets into polished, readable visual stories that can stand alone or form a complete editorial page.
 
-Its visual language is built around a consistent monochrome palette, typography, spacing, line work, and motion system. It includes three main chart families:
+Its visual language is built around consistent typography, spacing, line work, and motion. It includes three main chart families:
 
 - **Lupi Editorial**: fine lines, dot fields, record-level detail, annotations, and generous whitespace for papers, long-form articles, annual reports, and slow-reading data stories.
 - **Glance**: bold bars, large numbers, blocks, and clear ranking for reports, dashboards, and situations where readers need the answer in seconds.
@@ -14,7 +14,7 @@ Its visual language is built around a consistent monochrome palette, typography,
 
 The skill also includes standalone interactive visualizations for networks, paths, and dense multi-segment flows. Each chart aims to preserve honest data units while treating headlines, annotations, sources, and page structure as part of the visualization.
 
-Charts default to a black, white, and gray palette. When a user explicitly requests color, or color represents a real data dimension, the skill can start from Porcelain, Palm, or Wire. These presets provide a stable first draft, not a locked palette: users can refine the colors after generation while preserving structure, contrast, and data meaning.
+Mono is the reliable fallback, but color does not require an explicit user request. The agent can choose automatically between Mono, Porcelain, Palm, and Wire based on the data structure and publishing context; when the fit is unclear, it returns to Mono. One HTML file or chart set uses one color system only, with no mixing between preset families. Colors can still be refined within the selected family while preserving structure, contrast, and data meaning.
 
 ## Preview
 
@@ -83,7 +83,7 @@ Motion preview:
 
 ### Added Color Mode
 
-Charts default to black, white, and gray, with three color preset families available when color is useful. If a user explicitly requests color, or color itself represents a real data dimension, the first draft starts from one preset to keep the palette coherent. The presets are not locked: colors can be refined after generation, with contrast, visual hierarchy, and data meaning checked again after each change.
+The skill can automatically choose Mono or one color preset from the data structure and publishing context; users do not need to request color first. Porcelain suits ordered or single-series data, Palm suits a small number of unordered categories, and Wire suits a restrained composition with one focal point. When the fit is unclear, the skill returns to Mono. Each HTML file or chart set uses one color system only, and preset families cannot be mixed. Colors can still be refined within the selected family, with contrast, visual hierarchy, and data meaning checked again after each change.
 
 #### Porcelain
 
