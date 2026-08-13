@@ -4,7 +4,7 @@
 
 [![Lieflat Charts: a data visualization skill with its own visual language](docs/assets/readme-hero-en.png)](https://moxt.ai/hub?view=skill&id=lieflat-charts)
 
-Lieflat Charts is an Agent Skills-compatible data visualization and report-generation skill for moxt, Claude Code, Codex, and other AI agents that support `SKILL.md`. Created at [moxt.ai](https://moxt.ai), it turns datasets into polished charts and can now generate publishable HTML reports from 12 full-page templates, each available in Chinese and English.
+Lieflat Charts is an Agent Skills-compatible data visualization and report-generation skill for moxt, Claude Code, Codex, and other AI agents that support `SKILL.md`. Created at [moxt.ai](https://moxt.ai), it defaults to polished charts; it switches to one of 12 full-page templates, each available in Chinese and English, only when the user explicitly asks for a report, annual report, monthly report, white paper, poster, brief, or similar narrative deliverable.
 
 Its visual language is built around consistent typography, spacing, line work, and motion. It includes three main chart families:
 

@@ -4,7 +4,7 @@
 
 [![Lieflat Charts：以统一的字体、留白、线条和动效建立自己的视觉语法的数据可视化 skill](docs/assets/readme-hero-zh.png)](https://moxt.ai/zh-CN/hub?view=skill&id=lieflat-charts)
 
-Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化与报告生成 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 [moxt.ai](https://moxt.ai) 制作，既能把数据做成有编辑感的图表，也能从 12 套中英文整页模板生成可发布的 HTML 报告。
+Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化与报告生成 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 [moxt.ai](https://moxt.ai) 制作，默认把数据做成有编辑感的图表；只有用户明确要求报告、年报、月报、白皮书、海报或 brief 时，才从 12 套中英文整页模板生成可发布的 HTML 报告。
 
 它以统一的字体、留白、线条和动效建立自己的视觉语法，包括以下几种视觉风格：
 
