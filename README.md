@@ -135,26 +135,61 @@ Mono 黑白灰是稳定的保底方案，同时也有彩色模式，目前支持
 
 ### 增加了报告模板
 
-现在可以在单张图表之外，直接从 12 套整页报告模板生成 HTML 报告。每套模板都提供中文版和 English 版，覆盖调研发布、年度复盘、月度运营、仪表盘、海报、研究简报和个人记录等场景。
+现在可以在单张图表之外，直接从 12 套整页报告模板生成 HTML 报告。每套模板都提供中文版和 English 版，覆盖调研发布、年度复盘、月度运营、仪表盘、海报、研究简报和个人记录等场景。预览按版心尺寸分组，避免把不同格式硬排在同一行。
+
+#### 1080 宽版
 
 <table>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/report-01.png" alt="报告模板 01 调研一页纸" width="100%"><br><strong>R01 · 调研一页纸</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-02.png" alt="报告模板 02 年度里程碑" width="100%"><br><strong>R02 · 年度里程碑</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-03.png" alt="报告模板 03 年度数据海报" width="100%"><br><strong>R03 · 年度数据海报</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-04.png" alt="报告模板 04 月度运营" width="100%"><br><strong>R04 · 月度运营</strong></td>
+    <td width="20%"><img src="docs/assets/reports/thumbs/report-01.png" alt="报告模板 01 调研一页纸" width="100%"><br><strong>R01 · 调研一页纸</strong></td>
+    <td width="20%"><img src="docs/assets/reports/thumbs/report-03.png" alt="报告模板 03 年度数据海报" width="100%"><br><strong>R03 · 年度数据海报</strong></td>
+    <td width="20%"><img src="docs/assets/reports/thumbs/report-04.png" alt="报告模板 04 月度运营" width="100%"><br><strong>R04 · 月度运营</strong></td>
+    <td width="20%"><img src="docs/assets/reports/thumbs/report-09.png" alt="报告模板 09 竞品对比仪表盘" width="100%"><br><strong>R09 · 竞品对比仪表盘</strong></td>
+    <td width="20%"><img src="docs/assets/reports/thumbs/report-12.png" alt="报告模板 12 周报速览" width="100%"><br><strong>R12 · 周报速览</strong></td>
   </tr>
+</table>
+
+#### 980 常规版
+
+<table>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/report-05.png" alt="报告模板 05 影响力故事" width="100%"><br><strong>R05 · 影响力故事</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-06.png" alt="报告模板 06 产品八年年鉴" width="100%"><br><strong>R06 · 产品八年年鉴</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-07.png" alt="报告模板 07 调研拼贴海报" width="100%"><br><strong>R07 · 调研拼贴海报</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-08.png" alt="报告模板 08 单位人群一页" width="100%"><br><strong>R08 · 单位人群一页</strong></td>
+    <td width="25%"><img src="docs/assets/reports/thumbs/report-02.png" alt="报告模板 02 年度里程碑" width="100%"><br><strong>R02 · 年度里程碑</strong></td>
+    <td width="25%"><img src="docs/assets/reports/thumbs/report-06.png" alt="报告模板 06 产品八年年鉴" width="100%"><br><strong>R06 · 产品八年年鉴</strong></td>
+    <td width="25%"><img src="docs/assets/reports/thumbs/report-07.png" alt="报告模板 07 调研拼贴海报" width="100%"><br><strong>R07 · 调研拼贴海报</strong></td>
+    <td width="25%"><img src="docs/assets/reports/thumbs/report-10.png" alt="报告模板 10 旅行手记" width="100%"><br><strong>R10 · 旅行手记</strong></td>
   </tr>
+</table>
+
+#### 880 中张
+
+<table>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/report-09.png" alt="报告模板 09 竞品对比仪表盘" width="100%"><br><strong>R09 · 竞品对比仪表盘</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-10.png" alt="报告模板 10 旅行手记" width="100%"><br><strong>R10 · 旅行手记</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-11.png" alt="报告模板 11 研究简报卡" width="100%"><br><strong>R11 · 研究简报卡</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-12.png" alt="报告模板 12 周报速览" width="100%"><br><strong>R12 · 周报速览</strong></td>
+    <td width="25%"><img src="docs/assets/reports/thumbs/report-08.png" alt="报告模板 08 单位人群一页" width="100%"><br><strong>R08 · 880 · 单位人群一页</strong></td>
+    <td width="25%"></td>
+    <td width="25%"></td>
+    <td width="25%"></td>
+  </tr>
+</table>
+
+#### 760 窄栏
+
+<table>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/thumbs/report-05.png" alt="报告模板 05 影响力故事" width="100%"><br><strong>R05 · 760 · 影响力故事</strong></td>
+    <td width="25%"></td>
+    <td width="25%"></td>
+    <td width="25%"></td>
+  </tr>
+</table>
+
+#### 600×1000 定尺
+
+<table>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/thumbs/report-11.png" alt="报告模板 11 研究简报卡" width="100%"><br><strong>R11 · 600×1000 · 研究简报卡</strong></td>
+    <td width="25%"></td>
+    <td width="25%"></td>
+    <td width="25%"></td>
   </tr>
 </table>
 
