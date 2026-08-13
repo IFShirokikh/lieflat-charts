@@ -4,7 +4,7 @@
 
 [![Lieflat Charts：以统一的字体、留白、线条和动效建立自己的视觉语法的数据可视化 skill](docs/assets/readme-hero-zh.png)](https://moxt.ai/zh-CN/hub?view=skill&id=lieflat-charts)
 
-Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 [moxt.ai](https://moxt.ai) 制作，专注于把数据图表做成有编辑感、能阅读、能组成完整页面的视觉内容。
+Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化与报告生成 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 [moxt.ai](https://moxt.ai) 制作，既能把数据做成有编辑感的图表，也能从 12 套中英文整页模板生成可发布的 HTML 报告。
 
 它以统一的字体、留白、线条和动效建立自己的视觉语法，包括以下几种视觉风格：
 
@@ -221,6 +221,7 @@ catalog.md 和 mono-tokens.js 是否存在。
 | **Glance** | 18 | 周报、dashboard、监控、汇报；需要快速排序和比较 | Chart.js / ECharts |
 | **Interactive** | 3 | 网络、路径、多段流向和高密度关系数据 | ECharts / SVG |
 | **Color Presets** | 3 套 / 15 个样张 | 需要颜色区分数据维度，或为 Mono 加一个受控视线落点 | 基于原模板换肤 |
+| **Report Templates** | 12 套 / 中英双版 | 调研、年报、月报、仪表盘、海报、简报和个人记录等完整整页报告 | 单文件 HTML |
 
 ### Lupi Editorial
 
@@ -258,16 +259,18 @@ catalog.md 和 mono-tokens.js 是否存在。
 ├── README.en.md             # English project guide
 ├── SKILL.md                 # Agent 使用的工作流与规则
 ├── catalog.md               # 49 个图型的数据契约索引
+├── report-catalog.md        # 12 套整页报告模板的场景索引
 ├── mono-tokens.js           # 共享视觉 token
 ├── color-presets.js         # 三套内置彩色预设
-├── templates/               # Lupi、Basics、Glance 与交互大图
-│   └── color/              # 彩色换肤样张
+├── templates/               # Lupi、Basics、Glance、交互与报告模板
+│   ├── color/               # 彩色换肤样张
+│   └── reports/             # 12 套报告模板，每套中英文双版
 ├── examples/                # 真实公开数据案例
 ├── docs/assets/             # README 模板截图与动态预览
 └── scripts/validate.mjs     # 发布前检查
 ```
 
-直接打开 `templates/` 下的 HTML 文件即可查看 gallery。Lupi 和 Basics 主要使用原生 SVG，F13 Treemap 使用 ECharts；Glance、Circular 和 Force 模板也通过 CDN 加载 Chart.js 或 ECharts，需要联网才能完整显示。
+直接打开 `templates/` 下的 HTML 文件即可查看 gallery；打开 `templates/reports/index.html` 可浏览报告模板并进入中英文版本。报告模式先从 `report-catalog.md` 选整页骨架，再为各图表槽位复用 `catalog.md` 中的真实图型。Lupi 和 Basics 主要使用原生 SVG，F13 Treemap 使用 ECharts；Glance、Circular、Force 以及报告模板 R11/R12 通过 CDN 加载 Chart.js 或 ECharts，需要联网才能完整显示。
 
 ## License
 

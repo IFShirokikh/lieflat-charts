@@ -30,8 +30,16 @@ const required = [
   'mono-tokens.js',
   'color-presets.js',
   'agents/openai.yaml',
+  'report-catalog.md',
+  'templates/reports/index.html',
   ...requiredColorTemplates,
 ];
+for (let i = 1; i <= 12; i += 1) {
+  const n = String(i).padStart(2, '0');
+  required.push(`templates/reports/report-${n}.zh.html`);
+  required.push(`templates/reports/report-${n}.en.html`);
+  required.push(`docs/assets/reports/report-${n}.png`);
+}
 
 const failures = [];
 const htmlFiles = [];
@@ -107,6 +115,18 @@ if (!catalogSource.includes('| F13 | Nested Treemap |')) failures.push('catalog.
 const skillSource = fs.readFileSync(path.join(root, 'SKILL.md'), 'utf8');
 for (const role of ['`BG`', '`TXT`', '`MUT`', '`GRID`', '`DATA`']) {
   if (!skillSource.includes(role)) failures.push(`SKILL.md 的 custom 色板规则缺少角色 ${role}`);
+}
+
+const reportCatalogSource = fs.readFileSync(path.join(root, 'report-catalog.md'), 'utf8');
+for (let i = 1; i <= 12; i += 1) {
+  const n = String(i).padStart(2, '0');
+  if (!reportCatalogSource.includes(`| R${n} |`)) failures.push(`report-catalog.md 缺少 R${n}`);
+  for (const language of ['zh', 'en']) {
+    const file = path.join(root, `templates/reports/report-${n}.${language}.html`);
+    const source = fs.readFileSync(file, 'utf8');
+    if (!source.includes('<!doctype html>')) failures.push(`${rel(file)} 不是完整 HTML 文档`);
+    if (!source.match(/<title>[\s\S]+<\/title>/i)) failures.push(`${rel(file)} 缺少 title`);
+  }
 }
 
 const presetChannels = new Map();
@@ -205,7 +225,7 @@ for (const file of textFiles) {
         failures.push(`${relative}:${lineNumber(source, match.index)} 颜色 ${match[0]} 不属于 ${colorTemplate[1]} 预设`);
       }
     }
-  } else if (relative !== 'color-presets.js') {
+  } else if (relative !== 'color-presets.js' && !relative.startsWith('templates/reports/')) {
     for (const match of source.matchAll(/#[0-9a-fA-F]{6}\b/g)) {
       const hex = match[0];
       const channels = [

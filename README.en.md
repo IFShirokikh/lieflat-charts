@@ -4,7 +4,7 @@
 
 [![Lieflat Charts: a data visualization skill with its own visual language](docs/assets/readme-hero-en.png)](https://moxt.ai/hub?view=skill&id=lieflat-charts)
 
-Lieflat Charts is an Agent Skills-compatible data visualization skill for moxt, Claude Code, Codex, and other AI agents that support `SKILL.md`. Created at [moxt.ai](https://moxt.ai), it turns datasets into polished, readable visual stories that can stand alone or form a complete editorial page.
+Lieflat Charts is an Agent Skills-compatible data visualization and report-generation skill for moxt, Claude Code, Codex, and other AI agents that support `SKILL.md`. Created at [moxt.ai](https://moxt.ai), it turns datasets into polished charts and can now generate publishable HTML reports from 12 full-page templates, each available in Chinese and English.
 
 Its visual language is built around consistent typography, spacing, line work, and motion. It includes three main chart families:
 
@@ -221,6 +221,7 @@ The number of charts follows the number of independent findings: one chart for o
 | **Glance** | 18 | Weekly reports, dashboards, monitoring, and presentations that require fast comparison | Chart.js / ECharts |
 | **Interactive** | 3 | Networks, paths, multi-segment flows, and high-density relationship data | ECharts / SVG |
 | **Color Presets** | 3 families / 15 samples | Distinguishing real data dimensions or adding one controlled focal point to monochrome charts | Restyled original templates |
+| **Report Templates** | 12 templates / two languages | Research, annual, monthly, dashboard, poster, brief, and notebook-style full-page reports | Single-file HTML |
 
 ### Lupi Editorial
 
@@ -258,16 +259,18 @@ Lieflat Charts differs from a conventional chart generator in more than color:
 ├── README.en.md             # English project guide
 ├── SKILL.md                 # Agent workflow and design rules
 ├── catalog.md               # Data-contract index for 49 chart types
+├── report-catalog.md        # Scenario index for 12 report templates
 ├── mono-tokens.js           # Shared monochrome design tokens
 ├── color-presets.js         # Three built-in color presets
-├── templates/               # Lupi, Basics, Glance, and interactive templates
-│   └── color/               # Color-restyled samples
+├── templates/               # Lupi, Basics, Glance, interactive, and report templates
+│   ├── color/               # Color-restyled samples
+│   └── reports/             # 12 report templates, each in Chinese and English
 ├── examples/                # Examples based on public datasets
 ├── docs/assets/             # README screenshots and motion previews
 └── scripts/validate.mjs     # Pre-release validation
 ```
 
-Open the HTML files under `templates/` directly to inspect the galleries. Lupi and Basics mainly use native SVG, while F13 Treemap uses ECharts. Glance, Circular, and Force templates also load Chart.js or ECharts from a CDN and require an internet connection unless those dependencies are inlined.
+Open the HTML files under `templates/` directly to inspect the galleries. Open `templates/reports/index.html` to browse the report templates and their Chinese/English variants. Report mode chooses a full-page skeleton from `report-catalog.md`, then reuses the real chart implementations indexed in `catalog.md` for each chart slot. Lupi and Basics mainly use native SVG, while F13 Treemap uses ECharts. Glance, Circular, Force, and report templates R11/R12 also load Chart.js or ECharts from a CDN and require an internet connection unless those dependencies are inlined.
 
 ## License
 
