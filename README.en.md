@@ -133,7 +133,7 @@ A black and gray palette with one fluorescent orange focal point.
 
 ## Latest Update
 
-### Added Report Templates
+### Added Report Mode
 
 Lieflat Charts can now generate complete HTML reports in addition to individual charts. The 12 full-page templates are available in Chinese and English for research publishing, annual reviews, monthly operations, dashboards, posters, research briefs, and personal notebooks.
 
