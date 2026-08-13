@@ -135,61 +135,26 @@ A black and gray palette with one fluorescent orange focal point.
 
 ### Added Report Templates
 
-Lieflat Charts can now generate complete HTML reports in addition to individual charts. The 12 full-page templates are available in Chinese and English for research publishing, annual reviews, monthly operations, dashboards, posters, research briefs, and personal notebooks. Previews are grouped by page width so unlike formats are not forced into the same row.
-
-#### 1080 Wide
+Lieflat Charts can now generate complete HTML reports in addition to individual charts. The 12 full-page templates are available in Chinese and English for research publishing, annual reviews, monthly operations, dashboards, posters, research briefs, and personal notebooks.
 
 <table>
   <tr>
-    <td width="20%"><img src="docs/assets/reports/en/thumbs/report-01.png" alt="Report Template 01 Survey One-Pager" width="100%"><br><strong>R01 · Survey One-Pager</strong></td>
-    <td width="20%"><img src="docs/assets/reports/en/thumbs/report-03.png" alt="Report Template 03 Year in Data" width="100%"><br><strong>R03 · Year in Data</strong></td>
-    <td width="20%"><img src="docs/assets/reports/en/thumbs/report-04.png" alt="Report Template 04 Monthly Ops" width="100%"><br><strong>R04 · Monthly Ops</strong></td>
-    <td width="20%"><img src="docs/assets/reports/en/thumbs/report-09.png" alt="Report Template 09 Data Story Dashboard" width="100%"><br><strong>R09 · Data Story Dashboard</strong></td>
-    <td width="20%"><img src="docs/assets/reports/en/thumbs/report-12.png" alt="Report Template 12 Weekly Glance" width="100%"><br><strong>R12 · Weekly Glance</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-09.png" alt="Report Template 09 Data Story Dashboard" width="100%"><br><strong>R09 · Data Story Dashboard</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-12.png" alt="Report Template 12 Weekly Glance" width="100%"><br><strong>R12 · Weekly Glance</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-08.png" alt="Report Template 08 Population One-Pager" width="100%"><br><strong>R08 · Population One-Pager</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-03.png" alt="Report Template 03 Year in Data" width="100%"><br><strong>R03 · Year in Data</strong></td>
   </tr>
-</table>
-
-#### 980 Standard
-
-<table>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/en/thumbs/report-02.png" alt="Report Template 02 Annual Milestones" width="100%"><br><strong>R02 · Annual Milestones</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/thumbs/report-06.png" alt="Report Template 06 Eight-Year Product Almanac" width="100%"><br><strong>R06 · Eight-Year Product Almanac</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/thumbs/report-07.png" alt="Report Template 07 Survey Collage Poster" width="100%"><br><strong>R07 · Survey Collage Poster</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/thumbs/report-10.png" alt="Report Template 10 Travel Notebook" width="100%"><br><strong>R10 · Travel Notebook</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-01.png" alt="Report Template 01 Survey One-Pager" width="100%"><br><strong>R01 · Survey One-Pager</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-10.png" alt="Report Template 10 Travel Notebook" width="100%"><br><strong>R10 · Travel Notebook</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-05.png" alt="Report Template 05 Impact Story" width="100%"><br><strong>R05 · Impact Story</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-06.png" alt="Report Template 06 Eight-Year Product Almanac" width="100%"><br><strong>R06 · Eight-Year Product Almanac</strong></td>
   </tr>
-</table>
-
-#### 880 Medium
-
-<table>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/en/thumbs/report-08.png" alt="Report Template 08 Population One-Pager" width="100%"><br><strong>R08 · 880 · Population One-Pager</strong></td>
-    <td width="25%"></td>
-    <td width="25%"></td>
-    <td width="25%"></td>
-  </tr>
-</table>
-
-#### 760 Narrow
-
-<table>
-  <tr>
-    <td width="25%"><img src="docs/assets/reports/en/thumbs/report-05.png" alt="Report Template 05 Impact Story" width="100%"><br><strong>R05 · 760 · Impact Story</strong></td>
-    <td width="25%"></td>
-    <td width="25%"></td>
-    <td width="25%"></td>
-  </tr>
-</table>
-
-#### 600×1000 Fixed
-
-<table>
-  <tr>
-    <td width="25%"><img src="docs/assets/reports/en/thumbs/report-11.png" alt="Report Template 11 Research Brief Card" width="100%"><br><strong>R11 · 600×1000 · Research Brief Card</strong></td>
-    <td width="25%"></td>
-    <td width="25%"></td>
-    <td width="25%"></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-02.png" alt="Report Template 02 Annual Milestones" width="100%"><br><strong>R02 · Annual Milestones</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-04.png" alt="Report Template 04 Monthly Ops" width="100%"><br><strong>R04 · Monthly Ops</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-07.png" alt="Report Template 07 Survey Collage Poster" width="100%"><br><strong>R07 · Survey Collage Poster</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-11.png" alt="Report Template 11 Research Brief Card" width="100%"><br><strong>R11 · Research Brief Card</strong></td>
   </tr>
 </table>
 
