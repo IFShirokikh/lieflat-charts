@@ -139,22 +139,22 @@ Mono 黑白灰是稳定的保底方案，同时也有彩色模式，目前支持
 
 <table>
   <tr>
+    <td width="25%"><img src="docs/assets/reports/report-03.png" alt="报告模板 03 年度数据海报" width="100%"><br><strong>R03 · 年度数据海报</strong></td>
     <td width="25%"><img src="docs/assets/reports/report-09.png" alt="报告模板 09 竞品对比仪表盘" width="100%"><br><strong>R09 · 竞品对比仪表盘</strong></td>
     <td width="25%"><img src="docs/assets/reports/report-12.png" alt="报告模板 12 周报速览" width="100%"><br><strong>R12 · 周报速览</strong></td>
     <td width="25%"><img src="docs/assets/reports/report-08.png" alt="报告模板 08 单位人群一页" width="100%"><br><strong>R08 · 单位人群一页</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-03.png" alt="报告模板 03 年度数据海报" width="100%"><br><strong>R03 · 年度数据海报</strong></td>
   </tr>
   <tr>
     <td width="25%"><img src="docs/assets/reports/report-01.png" alt="报告模板 01 调研一页纸" width="100%"><br><strong>R01 · 调研一页纸</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-10.png" alt="报告模板 10 旅行手记" width="100%"><br><strong>R10 · 旅行手记</strong></td>
     <td width="25%"><img src="docs/assets/reports/report-05.png" alt="报告模板 05 影响力故事" width="100%"><br><strong>R05 · 影响力故事</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-06.png" alt="报告模板 06 产品八年年鉴" width="100%"><br><strong>R06 · 产品八年年鉴</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-10.png" alt="报告模板 10 旅行手记" width="100%"><br><strong>R10 · 旅行手记</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-07.png" alt="报告模板 07 调研拼贴海报" width="100%"><br><strong>R07 · 调研拼贴海报</strong></td>
   </tr>
   <tr>
     <td width="25%"><img src="docs/assets/reports/report-02.png" alt="报告模板 02 年度里程碑" width="100%"><br><strong>R02 · 年度里程碑</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-04.png" alt="报告模板 04 月度运营" width="100%"><br><strong>R04 · 月度运营</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-07.png" alt="报告模板 07 调研拼贴海报" width="100%"><br><strong>R07 · 调研拼贴海报</strong></td>
     <td width="25%"><img src="docs/assets/reports/report-11.png" alt="报告模板 11 研究简报卡" width="100%"><br><strong>R11 · 研究简报卡</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-04.png" alt="报告模板 04 月度运营" width="100%"><br><strong>R04 · 月度运营</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-06.png" alt="报告模板 06 产品八年年鉴" width="100%"><br><strong>R06 · 产品八年年鉴</strong></td>
   </tr>
 </table>
 
