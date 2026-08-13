@@ -79,9 +79,7 @@ Mono 黑白灰是稳定的保底方案，同时也有彩色模式，目前支持
 
 [打开 Force Graph 模板体验拖拽与缩放](https://larashero3-dotcom.github.io/lieflat-charts/templates/big-force.html)
 
-## 最新更新 2026.8.6
-
-### 增加了彩色模式
+## 增加了彩色模式
 
 图表可以根据数据结构和使用场景自动选择 Mono 或一套彩色预设，不要求用户先说“要彩色”。有序单序列可使用青瓷蓝，少量无序类目可使用椰林绿，需要一个受控视线落点时可使用编辑部红；适配关系不明确时回到 Mono。用户明确给出品牌色或色值时，可以建立一套 custom 色板。同一份 HTML 或同一组图只使用一种色彩系统；调整时需重新检查对比度、视觉主次和颜色所表达的数据含义。
 
@@ -131,6 +129,33 @@ Mono 黑白灰是稳定的保底方案，同时也有彩色模式，目前支持
     <td width="50%"><img src="docs/assets/preview-color-wire-glance.png" alt="编辑部红 Glance 彩色图表预览" width="100%"><br><strong>Glance</strong></td>
   </tr>
   <tr><td colspan="2"><img src="docs/assets/preview-color-wire.png" alt="编辑部红 Lupi 彩色图表预览" width="100%"><br><strong>Lupi Editorial</strong></td></tr>
+</table>
+
+## 最新更新
+
+### 增加了报告模板
+
+现在可以在单张图表之外，直接从 12 套整页报告模板生成 HTML 报告。每套模板都提供中文版和 English 版，覆盖调研发布、年度复盘、月度运营、仪表盘、海报、研究简报和个人记录等场景。
+
+<table>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/report-01.png" alt="报告模板 01 调研一页纸" width="100%"><br><strong>R01 · 调研一页纸</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-02.png" alt="报告模板 02 年度里程碑" width="100%"><br><strong>R02 · 年度里程碑</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-03.png" alt="报告模板 03 年度数据海报" width="100%"><br><strong>R03 · 年度数据海报</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-04.png" alt="报告模板 04 月度运营" width="100%"><br><strong>R04 · 月度运营</strong></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/report-05.png" alt="报告模板 05 影响力故事" width="100%"><br><strong>R05 · 影响力故事</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-06.png" alt="报告模板 06 产品八年年鉴" width="100%"><br><strong>R06 · 产品八年年鉴</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-07.png" alt="报告模板 07 调研拼贴海报" width="100%"><br><strong>R07 · 调研拼贴海报</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-08.png" alt="报告模板 08 单位人群一页" width="100%"><br><strong>R08 · 单位人群一页</strong></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/report-09.png" alt="报告模板 09 竞品对比仪表盘" width="100%"><br><strong>R09 · 竞品对比仪表盘</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-10.png" alt="报告模板 10 旅行手记" width="100%"><br><strong>R10 · 旅行手记</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-11.png" alt="报告模板 11 研究简报卡" width="100%"><br><strong>R11 · 研究简报卡</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-12.png" alt="报告模板 12 周报速览" width="100%"><br><strong>R12 · 周报速览</strong></td>
+  </tr>
 </table>
 
 ## 零门槛快速使用
