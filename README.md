@@ -4,7 +4,7 @@
 
 [![Lieflat Charts：以统一的字体、留白、线条和动效建立自己的视觉语法的数据可视化 skill](docs/assets/readme-hero-zh.png)](https://moxt.ai/zh-CN/hub?view=skill&id=lieflat-charts)
 
-Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 [moxt.ai](https://moxt.ai) 制作，专注于把数据图表做成有编辑感、能阅读、能组成完整页面的视觉内容。
+Lieflat Charts 是一套遵循 Agent Skills 格式的数据可视化与报告生成 skill，可供 moxt、Claude Code、Codex 及其他兼容 `SKILL.md` 的 AI agent 使用。本 skill 在 [moxt.ai](https://moxt.ai) 制作，默认把数据做成有编辑感的图表；只有用户明确要求报告、年报、月报、白皮书、海报或 brief 时，才从 12 套中英文整页模板生成可发布的 HTML 报告。
 
 它以统一的字体、留白、线条和动效建立自己的视觉语法，包括以下几种视觉风格：
 
@@ -79,9 +79,7 @@ Mono 黑白灰是稳定的保底方案，同时也有彩色模式，目前支持
 
 [打开 Force Graph 模板体验拖拽与缩放](https://larashero3-dotcom.github.io/lieflat-charts/templates/big-force.html)
 
-## 最新更新 2026.8.6
-
-### 增加了彩色模式
+## 增加了彩色模式
 
 图表可以根据数据结构和使用场景自动选择 Mono 或一套彩色预设，不要求用户先说“要彩色”。有序单序列可使用青瓷蓝，少量无序类目可使用椰林绿，需要一个受控视线落点时可使用编辑部红；适配关系不明确时回到 Mono。用户明确给出品牌色或色值时，可以建立一套 custom 色板。同一份 HTML 或同一组图只使用一种色彩系统；调整时需重新检查对比度、视觉主次和颜色所表达的数据含义。
 
@@ -131,6 +129,33 @@ Mono 黑白灰是稳定的保底方案，同时也有彩色模式，目前支持
     <td width="50%"><img src="docs/assets/preview-color-wire-glance.png" alt="编辑部红 Glance 彩色图表预览" width="100%"><br><strong>Glance</strong></td>
   </tr>
   <tr><td colspan="2"><img src="docs/assets/preview-color-wire.png" alt="编辑部红 Lupi 彩色图表预览" width="100%"><br><strong>Lupi Editorial</strong></td></tr>
+</table>
+
+## 最新更新
+
+### 增加了报告模式
+
+现在可以在单张图表之外，直接从 12 套整页报告模板生成 HTML 报告。每套模板都提供中文版和 English 版，覆盖调研发布、年度复盘、月度运营、仪表盘、海报、研究简报和个人记录等场景。
+
+<table>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/report-03.png" alt="报告模板 03 年度数据海报" width="100%"><br><strong>R03 · 年度数据海报</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-09.png" alt="报告模板 09 竞品对比仪表盘" width="100%"><br><strong>R09 · 竞品对比仪表盘</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-12.png" alt="报告模板 12 周报速览" width="100%"><br><strong>R12 · 周报速览</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-08.png" alt="报告模板 08 单位人群一页" width="100%"><br><strong>R08 · 单位人群一页</strong></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/report-01.png" alt="报告模板 01 调研一页纸" width="100%"><br><strong>R01 · 调研一页纸</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-05.png" alt="报告模板 05 影响力故事" width="100%"><br><strong>R05 · 影响力故事</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-10.png" alt="报告模板 10 旅行手记" width="100%"><br><strong>R10 · 旅行手记</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-07.png" alt="报告模板 07 调研拼贴海报" width="100%"><br><strong>R07 · 调研拼贴海报</strong></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/report-02.png" alt="报告模板 02 年度里程碑" width="100%"><br><strong>R02 · 年度里程碑</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-11.png" alt="报告模板 11 研究简报卡" width="100%"><br><strong>R11 · 研究简报卡</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-04.png" alt="报告模板 04 月度运营" width="100%"><br><strong>R04 · 月度运营</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-06.png" alt="报告模板 06 产品八年年鉴" width="100%"><br><strong>R06 · 产品八年年鉴</strong></td>
+  </tr>
 </table>
 
 ## 零门槛快速使用
@@ -221,6 +246,7 @@ catalog.md 和 mono-tokens.js 是否存在。
 | **Glance** | 18 | 周报、dashboard、监控、汇报；需要快速排序和比较 | Chart.js / ECharts |
 | **Interactive** | 3 | 网络、路径、多段流向和高密度关系数据 | ECharts / SVG |
 | **Color Presets** | 3 套 / 15 个样张 | 需要颜色区分数据维度，或为 Mono 加一个受控视线落点 | 基于原模板换肤 |
+| **Report Templates** | 12 套 / 中英双版 | 调研、年报、月报、仪表盘、海报、简报和个人记录等完整整页报告 | 单文件 HTML |
 
 ### Lupi Editorial
 
@@ -258,16 +284,18 @@ catalog.md 和 mono-tokens.js 是否存在。
 ├── README.en.md             # English project guide
 ├── SKILL.md                 # Agent 使用的工作流与规则
 ├── catalog.md               # 49 个图型的数据契约索引
+├── report-catalog.md        # 12 套整页报告模板的场景索引
 ├── mono-tokens.js           # 共享视觉 token
 ├── color-presets.js         # 三套内置彩色预设
-├── templates/               # Lupi、Basics、Glance 与交互大图
-│   └── color/              # 彩色换肤样张
+├── templates/               # Lupi、Basics、Glance、交互与报告模板
+│   ├── color/               # 彩色换肤样张
+│   └── reports/             # 12 套报告模板，每套中英文双版
 ├── examples/                # 真实公开数据案例
 ├── docs/assets/             # README 模板截图与动态预览
 └── scripts/validate.mjs     # 发布前检查
 ```
 
-直接打开 `templates/` 下的 HTML 文件即可查看 gallery。Lupi 和 Basics 主要使用原生 SVG，F13 Treemap 使用 ECharts；Glance、Circular 和 Force 模板也通过 CDN 加载 Chart.js 或 ECharts，需要联网才能完整显示。
+直接打开 `templates/` 下的 HTML 文件即可查看 gallery；打开 `templates/reports/index.html` 可浏览报告模板并进入中英文版本。报告模式先从 `report-catalog.md` 选整页骨架，再为各图表槽位复用 `catalog.md` 中的真实图型。Lupi 和 Basics 主要使用原生 SVG，F13 Treemap 使用 ECharts；Glance、Circular、Force 以及报告模板 R11/R12 通过 CDN 加载 Chart.js 或 ECharts，需要联网才能完整显示。
 
 ## License
 

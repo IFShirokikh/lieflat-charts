@@ -4,7 +4,7 @@
 
 [![Lieflat Charts: a data visualization skill with its own visual language](docs/assets/readme-hero-en.png)](https://moxt.ai/hub?view=skill&id=lieflat-charts)
 
-Lieflat Charts is an Agent Skills-compatible data visualization skill for moxt, Claude Code, Codex, and other AI agents that support `SKILL.md`. Created at [moxt.ai](https://moxt.ai), it turns datasets into polished, readable visual stories that can stand alone or form a complete editorial page.
+Lieflat Charts is an Agent Skills-compatible data visualization and report-generation skill for moxt, Claude Code, Codex, and other AI agents that support `SKILL.md`. Created at [moxt.ai](https://moxt.ai), it defaults to polished charts; it switches to one of 12 full-page templates, each available in Chinese and English, only when the user explicitly asks for a report, annual report, monthly report, white paper, poster, brief, or similar narrative deliverable.
 
 Its visual language is built around consistent typography, spacing, line work, and motion. It includes three main chart families:
 
@@ -79,9 +79,7 @@ Motion preview:
 
 [Open the Force Graph template to try dragging and zooming](https://larashero3-dotcom.github.io/lieflat-charts/templates/big-force.html)
 
-## Latest Update: 2026.8.6
-
-### Added Color Mode
+## Added Color Mode
 
 The skill can automatically choose Mono or one color preset from the data structure and publishing context; users do not need to request color first. Porcelain suits ordered or single-series data, Palm suits a small number of unordered categories, and Wire suits a restrained composition with one focal point. When the fit is unclear, the skill returns to Mono. Users who provide brand colors or exact values can use one custom palette. Each HTML file or chart set still locks one color system, with contrast, hierarchy, and data meaning checked after every change.
 
@@ -131,6 +129,33 @@ A black and gray palette with one fluorescent orange focal point.
     <td width="50%"><img src="docs/assets/preview-color-wire-glance.png" alt="Wire Glance color preview" width="100%"><br><strong>Glance</strong></td>
   </tr>
   <tr><td colspan="2"><img src="docs/assets/preview-color-wire.png" alt="Wire Lupi Editorial color preview" width="100%"><br><strong>Lupi Editorial</strong></td></tr>
+</table>
+
+## Latest Update
+
+### Added Report Mode
+
+Lieflat Charts can now generate complete HTML reports in addition to individual charts. The 12 full-page templates are available in Chinese and English for research publishing, annual reviews, monthly operations, dashboards, posters, research briefs, and personal notebooks.
+
+<table>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/en/report-03.png" alt="Report Template 03 Year in Data" width="100%"><br><strong>R03 · Year in Data</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-09.png" alt="Report Template 09 Data Story Dashboard" width="100%"><br><strong>R09 · Data Story Dashboard</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-12.png" alt="Report Template 12 Weekly Glance" width="100%"><br><strong>R12 · Weekly Glance</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-08.png" alt="Report Template 08 Population One-Pager" width="100%"><br><strong>R08 · Population One-Pager</strong></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/en/report-01.png" alt="Report Template 01 Survey One-Pager" width="100%"><br><strong>R01 · Survey One-Pager</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-05.png" alt="Report Template 05 Impact Story" width="100%"><br><strong>R05 · Impact Story</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-10.png" alt="Report Template 10 Travel Notebook" width="100%"><br><strong>R10 · Travel Notebook</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-07.png" alt="Report Template 07 Survey Collage Poster" width="100%"><br><strong>R07 · Survey Collage Poster</strong></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/assets/reports/en/report-02.png" alt="Report Template 02 Annual Milestones" width="100%"><br><strong>R02 · Annual Milestones</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-11.png" alt="Report Template 11 Research Brief Card" width="100%"><br><strong>R11 · Research Brief Card</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-04.png" alt="Report Template 04 Monthly Ops" width="100%"><br><strong>R04 · Monthly Ops</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-06.png" alt="Report Template 06 Eight-Year Product Almanac" width="100%"><br><strong>R06 · Eight-Year Product Almanac</strong></td>
+  </tr>
 </table>
 
 ## Quick Start
@@ -221,6 +246,7 @@ The number of charts follows the number of independent findings: one chart for o
 | **Glance** | 18 | Weekly reports, dashboards, monitoring, and presentations that require fast comparison | Chart.js / ECharts |
 | **Interactive** | 3 | Networks, paths, multi-segment flows, and high-density relationship data | ECharts / SVG |
 | **Color Presets** | 3 families / 15 samples | Distinguishing real data dimensions or adding one controlled focal point to monochrome charts | Restyled original templates |
+| **Report Templates** | 12 templates / two languages | Research, annual, monthly, dashboard, poster, brief, and notebook-style full-page reports | Single-file HTML |
 
 ### Lupi Editorial
 
@@ -258,16 +284,18 @@ Lieflat Charts differs from a conventional chart generator in more than color:
 ├── README.en.md             # English project guide
 ├── SKILL.md                 # Agent workflow and design rules
 ├── catalog.md               # Data-contract index for 49 chart types
+├── report-catalog.md        # Scenario index for 12 report templates
 ├── mono-tokens.js           # Shared monochrome design tokens
 ├── color-presets.js         # Three built-in color presets
-├── templates/               # Lupi, Basics, Glance, and interactive templates
-│   └── color/               # Color-restyled samples
+├── templates/               # Lupi, Basics, Glance, interactive, and report templates
+│   ├── color/               # Color-restyled samples
+│   └── reports/             # 12 report templates, each in Chinese and English
 ├── examples/                # Examples based on public datasets
 ├── docs/assets/             # README screenshots and motion previews
 └── scripts/validate.mjs     # Pre-release validation
 ```
 
-Open the HTML files under `templates/` directly to inspect the galleries. Lupi and Basics mainly use native SVG, while F13 Treemap uses ECharts. Glance, Circular, and Force templates also load Chart.js or ECharts from a CDN and require an internet connection unless those dependencies are inlined.
+Open the HTML files under `templates/` directly to inspect the galleries. Open `templates/reports/index.html` to browse the report templates and their Chinese/English variants. Report mode chooses a full-page skeleton from `report-catalog.md`, then reuses the real chart implementations indexed in `catalog.md` for each chart slot. Lupi and Basics mainly use native SVG, while F13 Treemap uses ECharts. Glance, Circular, Force, and report templates R11/R12 also load Chart.js or ECharts from a CDN and require an internet connection unless those dependencies are inlined.
 
 ## License
 
