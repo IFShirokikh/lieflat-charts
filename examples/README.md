@@ -2,6 +2,12 @@
 
 templates/ 里的 gallery 是「例句」（演示数据、多卡合页）；这里是「成文」——拿一篇真实文章的公开数据，从判形状到出图走完整个 skill 流程的成品。拿不准交付物该长什么样，先看这里。
 
+## r04-financial-report.zh.html
+
+这是 R04「月度运营」模板的一份财务场景示例：保留原有版心和四个图表槽位，将内容改为月度经营财报，包括收入、毛利、经营现金流、毛利率、现金可支撑月数、每日收入、回款时段、收入构成和业务线毛利贡献。数据为虚构演示数据，用来说明同一模板如何适配金融 / 经济类报告。
+
+预览图：[R04 月度经营财报](../docs/assets/examples/r04-financial-report.zh.png)
+
 ## lenny-2026-survey.html
 
 数据来源：Lenny's Newsletter《How tech workers are feeling in 2026》（2026-07-07，年度科技从业者调研）。一篇文章 → 8 张图，全英文，8 个模板不重复：
