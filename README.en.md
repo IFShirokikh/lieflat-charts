@@ -139,22 +139,22 @@ Lieflat Charts can now generate complete HTML reports in addition to individual 
 
 <table>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/en/report-03.png" alt="Report Template 03 Year in Data" width="100%"><br><strong>R03 · Year in Data</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-09.png" alt="Report Template 09 Data Story Dashboard" width="100%"><br><strong>R09 · Data Story Dashboard</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-12.png" alt="Report Template 12 Weekly Glance" width="100%"><br><strong>R12 · Weekly Glance</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-08.png" alt="Report Template 08 Population One-Pager" width="100%"><br><strong>R08 · Population One-Pager</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-03.png" alt="Report Template 03 Annual Data Report / Poster" width="100%"><br><strong>R03 · Annual Data Report / Poster</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-09.png" alt="Report Template 09 Business Data / Financial Dashboard" width="100%"><br><strong>R09 · Business Data / Financial Dashboard</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-12.png" alt="Report Template 12 Periodic Data Brief / Monitoring Summary" width="100%"><br><strong>R12 · Periodic Data Brief / Monitoring Summary</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-08.png" alt="Report Template 08 Population / Socioeconomic One-Pager" width="100%"><br><strong>R08 · Population / Socioeconomic One-Pager</strong></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/en/report-01.png" alt="Report Template 01 Survey One-Pager" width="100%"><br><strong>R01 · Survey One-Pager</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-05.png" alt="Report Template 05 Impact Story" width="100%"><br><strong>R05 · Impact Story</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-10.png" alt="Report Template 10 Travel Notebook" width="100%"><br><strong>R10 · Travel Notebook</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-07.png" alt="Report Template 07 Survey Collage Poster" width="100%"><br><strong>R07 · Survey Collage Poster</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-01.png" alt="Report Template 01 Research Report / One-Pager" width="100%"><br><strong>R01 · Research Report / One-Pager</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-05.png" alt="Report Template 05 Project / Product Impact Story" width="100%"><br><strong>R05 · Project / Product Impact Story</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-10.png" alt="Report Template 10 Personal Data / Sports / Travel Record" width="100%"><br><strong>R10 · Personal Data / Sports / Travel Record</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-07.png" alt="Report Template 07 Research / Market Data Collage Poster" width="100%"><br><strong>R07 · Research / Market Data Collage Poster</strong></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/en/report-02.png" alt="Report Template 02 Annual Milestones" width="100%"><br><strong>R02 · Annual Milestones</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-11.png" alt="Report Template 11 Research Brief Card" width="100%"><br><strong>R11 · Research Brief Card</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-04.png" alt="Report Template 04 Monthly Ops" width="100%"><br><strong>R04 · Monthly Ops</strong></td>
-    <td width="25%"><img src="docs/assets/reports/en/report-06.png" alt="Report Template 06 Eight-Year Product Almanac" width="100%"><br><strong>R06 · Eight-Year Product Almanac</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-02.png" alt="Report Template 02 Annual Review / Performance Recap" width="100%"><br><strong>R02 · Annual Review / Performance Recap</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-11.png" alt="Report Template 11 Research / Financial Brief Card" width="100%"><br><strong>R11 · Research / Financial Brief Card</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-04.png" alt="Report Template 04 Monthly Business / Financial Report" width="100%"><br><strong>R04 · Monthly Business / Financial Report</strong></td>
+    <td width="25%"><img src="docs/assets/reports/en/report-06.png" alt="Report Template 06 Long-Cycle Product / Business Almanac" width="100%"><br><strong>R06 · Long-Cycle Product / Business Almanac</strong></td>
   </tr>
 </table>
 

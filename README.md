@@ -135,26 +135,26 @@ Mono 黑白灰是稳定的保底方案，同时也有彩色模式，目前支持
 
 ### 增加了报告模式
 
-现在可以在单张图表之外，直接从 12 套整页报告模板生成 HTML 报告。每套模板都提供中文版和 English 版，覆盖调研报告、研究简报、业务数据报告、财报与金融经济分析、产品记录、dashboard、海报，以及运动、旅行和年度生活数据记录等从工作到个人的需求。模板名称代表版式性格，不是使用场景的限制；同一套模板可以根据数据结构迁移到不同类型的报告。
+现在可以在单张图表之外，直接从 12 套整页报告模板生成 HTML 报告。每套模板都提供中文版和英文版，覆盖调研报告、研究简报、业务数据报告、财报与金融经济分析、产品记录、dashboard、海报，以及运动、旅行和年度生活数据记录等从工作到个人的需求。模板名称代表版式性格，不是使用场景的限制；同一套模板可以根据数据结构迁移到不同类型的报告。
 
 <table>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/report-03.png" alt="报告模板 03 年度数据海报" width="100%"><br><strong>R03 · 年度数据海报</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-09.png" alt="报告模板 09 竞品对比仪表盘" width="100%"><br><strong>R09 · 竞品对比仪表盘</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-12.png" alt="报告模板 12 周报速览" width="100%"><br><strong>R12 · 周报速览</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-08.png" alt="报告模板 08 单位人群一页" width="100%"><br><strong>R08 · 单位人群一页</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-03.png" alt="报告模板 03 年度数据报告 / 年度海报" width="100%"><br><strong>R03 · 年度数据报告 / 年度海报</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-09.png" alt="报告模板 09 业务数据 / 财务经营 Dashboard" width="100%"><br><strong>R09 · 业务数据 / 财务经营 Dashboard</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-12.png" alt="报告模板 12 周期数据快报 / 监控摘要" width="100%"><br><strong>R12 · 周期数据快报 / 监控摘要</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-08.png" alt="报告模板 08 人群与社会经济数据一页" width="100%"><br><strong>R08 · 人群 / 社会经济数据一页</strong></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/report-01.png" alt="报告模板 01 调研一页纸" width="100%"><br><strong>R01 · 调研一页纸</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-05.png" alt="报告模板 05 影响力故事" width="100%"><br><strong>R05 · 影响力故事</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-10.png" alt="报告模板 10 旅行手记" width="100%"><br><strong>R10 · 旅行手记</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-07.png" alt="报告模板 07 调研拼贴海报" width="100%"><br><strong>R07 · 调研拼贴海报</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-01.png" alt="报告模板 01 调研报告 / 研究一页" width="100%"><br><strong>R01 · 调研报告 / 研究一页</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-05.png" alt="报告模板 05 项目 / 产品影响力故事" width="100%"><br><strong>R05 · 项目 / 产品影响力故事</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-10.png" alt="报告模板 10 个人数据 / 运动 / 旅行记录" width="100%"><br><strong>R10 · 个人数据 / 运动 / 旅行记录</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-07.png" alt="报告模板 07 调研 / 市场数据拼贴海报" width="100%"><br><strong>R07 · 调研 / 市场数据拼贴海报</strong></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/assets/reports/report-02.png" alt="报告模板 02 年度里程碑" width="100%"><br><strong>R02 · 年度里程碑</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-11.png" alt="报告模板 11 研究简报卡" width="100%"><br><strong>R11 · 研究简报卡</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-04.png" alt="报告模板 04 月度运营" width="100%"><br><strong>R04 · 月度运营</strong></td>
-    <td width="25%"><img src="docs/assets/reports/report-06.png" alt="报告模板 06 产品八年年鉴" width="100%"><br><strong>R06 · 产品八年年鉴</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-02.png" alt="报告模板 02 年度复盘 / 业绩回顾" width="100%"><br><strong>R02 · 年度复盘 / 业绩回顾</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-11.png" alt="报告模板 11 研究 / 金融经济简报卡" width="100%"><br><strong>R11 · 研究 / 金融经济简报卡</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-04.png" alt="报告模板 04 月度业务 / 财务经营报告" width="100%"><br><strong>R04 · 月度业务 / 财务经营报告</strong></td>
+    <td width="25%"><img src="docs/assets/reports/report-06.png" alt="报告模板 06 长周期产品 / 业务年鉴" width="100%"><br><strong>R06 · 长周期产品 / 业务年鉴</strong></td>
   </tr>
 </table>
 
