@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lieflat-charts:spec:v1",
+  "title": "Спецификация Lieflat Charts v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "templateId", "locale", "palette", "content", "payload"],
+  "properties": {
+    "version": {"const": 1},
+    "templateId": {"type": "string", "pattern": "^(L([1-9]|1[0-9]|20)|F([1-9]|1[0-7])|G([1-9]|1[0-9]|2[0-2])|M[12]|B[123]|R(0[1-9]|1[0-2]))$"},
+    "locale": {"const": "ru"},
+    "palette": {
+      "oneOf": [
+        {"enum": ["mono", "palm", "porcelain", "wire"]},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "colors"],
+          "properties": {
+            "name": {"const": "custom"},
+            "colors": {"type": "array", "minItems": 2, "maxItems": 8, "items": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"}}
+          }
+        }
+      ]
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1, "maxLength": 240},
+        "subtitle": {"type": "string", "maxLength": 500},
+        "source": {"type": "string", "maxLength": 300},
+        "note": {"type": "string", "maxLength": 1000},
+        "eyebrow": {"type": "string", "maxLength": 120},
+        "period": {"type": "string", "maxLength": 120}
+      }
+    },
+    "payload": {"type": "object", "maxProperties": 12}
+  }
+}

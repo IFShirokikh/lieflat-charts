@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "templateId": "M2",
+  "locale": "ru",
+  "palette": "palm",
+  "content": {
+    "title": "География аудитории",
+    "subtitle": "Активные пользователи по странам",
+    "source": "Агрегированная статистика"
+  },
+  "payload": {
+    "regions": [
+      {"name": "Russia", "value": 420},
+      {"name": "Germany", "value": 180},
+      {"name": "France", "value": 130},
+      {"name": "Brazil", "value": 95}
+    ]
+  }
+}
