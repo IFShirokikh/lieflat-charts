@@ -93,6 +93,16 @@ async function connect(url) {
   return new Cdp(socket);
 }
 
+async function stopChrome(child) {
+  if (child.exitCode !== null) return;
+  const exited = new Promise(resolve => child.once('exit',resolve));
+  child.kill('SIGTERM');
+  const graceful = await Promise.race([exited.then(() => true),new Promise(resolve => setTimeout(() => resolve(false),2000))]);
+  if (graceful || child.exitCode !== null) return;
+  child.kill('SIGKILL');
+  await Promise.race([exited,new Promise(resolve => setTimeout(resolve,2000))]);
+}
+
 async function evaluate(cdp, sessionId, expression) {
   const result = await cdp.send('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true},sessionId);
   if (result.exceptionDetails) throw new Error('Исключение при проверке страницы');
@@ -191,8 +201,9 @@ async function main() {
     process.stdout.write(`Проверено в браузере: ${files.length - 1} шаблонов и XSS-сценарий, сетевых запросов нет. Контрольные снимки: ${path.relative(ROOT,snapshots)}\n`);
   } finally {
     stopEvents();
-    await cdp.send('Browser.close').catch(() => {});
-    child.kill('SIGTERM');
+    await Promise.race([cdp.send('Browser.close').catch(() => {}),new Promise(resolve => setTimeout(resolve,1000))]);
+    cdp.socket.close();
+    await stopChrome(child);
     await rm(temporary,{recursive:true,force:true});
   }
 }
