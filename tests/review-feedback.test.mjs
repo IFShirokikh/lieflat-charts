@@ -57,7 +57,8 @@ test('валидатор требует полную каноническую CS
     .replace('img-src data:','img-src http:')
     .replace('</body>','<img srcset="http&#58;//127.0.0.1:9/утечка"></body>');
   await assert.rejects(() => validateOutputHtml(weakened),/CSP/u);
-  await assert.rejects(() => validateOutputHtml(html.replace('</head>','<meta http-equiv="refresh" content="0;url=&#104;ttp://127.0.0.1:9"></head>')),/meta refresh/u);
+  await assert.rejects(() => validateOutputHtml(html.replace('</head>','<meta http-equiv="refresh" content="0;url=&#104;ttp://127.0.0.1:9"></head>')),/meta/u);
+  await assert.rejects(() => validateOutputHtml(html.replace('</head>','<meta http-equiv="re&#102;resh" content="0;url=&#104;ttp://127.0.0.1:9"></head>')),/meta/u);
 });
 
 test('Sankey отклоняет циклы, а обычный граф их принимает', async () => {

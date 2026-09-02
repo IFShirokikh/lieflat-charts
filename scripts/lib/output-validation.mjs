@@ -55,6 +55,14 @@ export async function validateOutputHtml(html) {
   const cspMatch = html.match(/<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]+)"\s*>/u);
   assert(cspMatch,'отсутствует CSP');
   const csp = cspMatch[1];
+  const metaTags = [...html.matchAll(/<meta\b[^>]*>/giu)].map(match => match[0]);
+  const expectedMetaTags = [
+    '<meta charset="utf-8">',
+    `<meta http-equiv="Content-Security-Policy" content="${csp}">`,
+    '<meta name="viewport" content="width=device-width,initial-scale=1">',
+    '<meta name="referrer" content="no-referrer">'
+  ];
+  assert(metaTags.length === expectedMetaTags.length && expectedMetaTags.every((tag,index) => metaTags[index] === tag),'набор meta-элементов не совпадает с обязательным');
 
   const scripts = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gu)].map(match => ({attributes:match[1],body:match[2]}));
   const executable = scripts.filter(script => !/type="application\/octet-stream"/u.test(script.attributes));
@@ -90,7 +98,6 @@ export async function validateOutputHtml(html) {
   const withoutScripts = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gu,'');
   assert(!/(?:src|href)\s*=\s*["']\s*(?:https?:|\/\/|ftp:|file:)/iu.test(withoutScripts),'обнаружен внешний ресурс');
   assert(!/<(?:iframe|frame|object|embed|form|base|link)\b/iu.test(withoutScripts),'обнаружен запрещённый HTML-элемент');
-  assert(!/<meta\b[^>]*http-equiv\s*=\s*["']?refresh\b/iu.test(withoutScripts),'обнаружена навигация через meta refresh');
   assert(!/\son[a-z]+\s*=/iu.test(withoutScripts),'обнаружен инлайн-обработчик событий');
   assert(!/url\(\s*["']?(?!data:)/iu.test(withoutScripts),'CSS ссылается на внешний ресурс');
   assert(!/(?:https?|ftp|file):\/\//iu.test(withoutScripts),'обнаружен внешний URL');
