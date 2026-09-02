@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "files": {
+    "vendor/echarts/echarts-6.1.0.min.js": {"sha256":"b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0","source":"npm:echarts@6.1.0","license":"Apache-2.0"},
+    "vendor/fonts/inter/cyrillic.woff2": {"sha256":"71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075","source":"npm:@fontsource-variable/inter@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/inter/latin.woff2": {"sha256":"3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62","source":"npm:@fontsource-variable/inter@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/source-serif-4/cyrillic.woff2": {"sha256":"25e85aef8acff54f91ea7e85c9c2c260caf97101fdef194ed6b8b58bc34ce3eb","source":"npm:@fontsource-variable/source-serif-4@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/source-serif-4/latin.woff2": {"sha256":"c1df4596be5029233ed2afbb8b2f6ea20784b3fb1aa5d6b5c6519ccd85eb3dfb","source":"npm:@fontsource-variable/source-serif-4@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/playfair-display/cyrillic.woff2": {"sha256":"c108681cba6a9820bff52f4a1a4a1d9edf356b347bd79b7c61e916028e8a8b54","source":"npm:@fontsource-variable/playfair-display@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/playfair-display/latin.woff2": {"sha256":"e0c764a8e9e1cce92163c55bac4b2ad6cd4cf8c696ce2289ab5c41565e65b7e2","source":"npm:@fontsource-variable/playfair-display@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/roboto-slab/cyrillic.woff2": {"sha256":"94ab3efd7d4242d5a6034b2ac62c60ece4ac41d408f74b3b993b897b797e11ed","source":"npm:@fontsource-variable/roboto-slab@5.3.0","license":"Apache-2.0"},
+    "vendor/fonts/roboto-slab/latin.woff2": {"sha256":"50cf7d32c18e1001749b51f1565ef745bc0687b0297b2b13465ed577cc20a8ff","source":"npm:@fontsource-variable/roboto-slab@5.3.0","license":"Apache-2.0"},
+    "vendor/fonts/oswald/cyrillic.woff2": {"sha256":"9307b75d3508236a0bae4f29ee3d2ce9aee545120ec9ef29e2cd1187bf6b0e5b","source":"npm:@fontsource-variable/oswald@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/oswald/latin.woff2": {"sha256":"bd73278ee0c50041b91b4c03d1229e35b501637f46b6409e7da2d3a758446ea5","source":"npm:@fontsource-variable/oswald@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/jetbrains-mono/cyrillic.woff2": {"sha256":"d274604c40757f98f07df623a8b8fb5194508a6fa4f5413a7a107f09e3b7452a","source":"npm:@fontsource-variable/jetbrains-mono@5.3.0","license":"OFL-1.1"},
+    "vendor/fonts/jetbrains-mono/latin.woff2": {"sha256":"18be452724bfdc236c074ca94a249a7f41a86752c7d04ab258ce9ed5651f6a7e","source":"npm:@fontsource-variable/jetbrains-mono@5.3.0","license":"OFL-1.1"},
+    "vendor/geo/usa.json": {"sha256":"625fee36be80a5422d21c5a5b922aed3ca028c27c9dc005ad73443bf37852834","source":"github:apache/echarts-examples@gh-pages/public/data/asset/geo/USA.json","license":"Apache-2.0"},
+    "vendor/geo/world.json": {"sha256":"049b334579e5a42d5d16c72d014d380e048e39fc1504049f212acb589484d2fa","source":"npm:echarts@4.9.0/map/json/world.json","license":"Apache-2.0"}
+  }
+}
