@@ -97,17 +97,26 @@
     else if (kind === 'waterfall') {
       const source = spec.payload.series[0];
       let cumulative = 0;
-      const baseline = [];
-      const changes = source.values.map(value => {
+      const changes = source.values.map((value,index) => {
         const previous = cumulative;
         cumulative += value;
-        baseline.push(Math.min(previous,cumulative));
-        return {value:Math.abs(value),itemStyle:{color:value < 0 ? palette.colors[2] || palette.muted : palette.colors[0]}};
+        return {name:spec.payload.categories[index],value:[spec.payload.categories[index],previous,cumulative,value]};
       });
-      option.series = [
-        {name:'Основание',type:'bar',stack:'waterfall',silent:true,tooltip:{show:false},itemStyle:{color:'transparent'},emphasis:{disabled:true},data:baseline},
-        {name:source.name,type:'bar',stack:'waterfall',barMaxWidth:54,data:changes}
-      ];
+      option.series = [{
+        name:source.name,
+        type:'custom',
+        dimensions:['Категория','Начало','Конец','Изменение'],
+        encode:{x:'Категория',y:['Начало','Конец'],tooltip:['Изменение'],itemName:'Категория'},
+        data:changes,
+        renderItem:(params,api) => {
+          const start = api.coord([api.value(0),api.value(1)]);
+          const end = api.coord([api.value(0),api.value(2)]);
+          const width = Math.min(54,api.size([1,0])[0] * 0.58);
+          const shape = echarts.graphic.clipRectByRect({x:start[0] - width / 2,y:Math.min(start[1],end[1]),width,height:Math.max(1,Math.abs(end[1] - start[1]))},params.coordSys);
+          if (!shape) return null;
+          return {type:'rect',shape,style:{fill:api.value(3) < 0 ? palette.colors[2] || palette.muted : palette.colors[0]}};
+        }
+      }];
     }
     else if (kind === 'line') option.series = seriesData(spec, 'line');
     else option.series = seriesData(spec, 'bar', {barMaxWidth:54, borderRadius:[3,3,0,0]});

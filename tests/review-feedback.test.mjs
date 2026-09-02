@@ -105,8 +105,13 @@ test('runtime сохраняет семантику waterfall, heatmap, Sankey �
   const catalog = await loadCatalog();
   const waterfallTemplate = catalog.get('F9');
   const waterfall = (await captureOptions(sampleSpec(waterfallTemplate),waterfallTemplate))[0];
-  assert.deepEqual(waterfall.series[0].data,[0,80,80]);
-  assert.deepEqual(waterfall.series[1].data.map(item => item.value),[100,20,30]);
+  assert.equal(waterfall.series[0].type,'custom');
+  assert.deepEqual(waterfall.series[0].data.map(item => item.value),[
+    ['Старт',0,10,10],
+    ['Снижение',10,-10,-20],
+    ['Рост',-10,5,15]
+  ]);
+  assert.deepEqual(waterfall.series[0].encode.tooltip,['Изменение']);
 
   const matrixTemplate = catalog.get('F10');
   const matrixSpec = sampleSpec(matrixTemplate);
@@ -146,4 +151,7 @@ test('JSON Schema назначает строгий payload-профиль ка�
   assert.equal(schema.$defs.seriesPayload.additionalProperties,false);
   assert.equal(schema.$defs.networkPayload.additionalProperties,false);
   assert.equal(schema.$defs.reportPayload.additionalProperties,false);
+  const eventPattern = schema.$defs.text.allOf.map(rule => rule.not?.pattern).find(pattern => pattern?.includes('[Oo][Nn]'));
+  assert.equal(new RegExp(eventPattern,'u').test('conversion=42'),false);
+  assert.equal(new RegExp(eventPattern,'u').test('onerror=alert'),true);
 });

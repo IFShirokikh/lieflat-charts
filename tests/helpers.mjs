@@ -9,7 +9,7 @@ export function sampleSpec(template) {
   };
   if (template.profile === 'series') base.payload = {categories:['Первая категория','Вторая категория','Третья категория'],series:[{name:'Значение',values:[12,28,19]},{name:'Сравнение',values:[9,22,24]}]};
   if (['pie','funnel','treemap'].includes(template.kind)) base.payload.series = [base.payload.series[0]];
-  if (template.kind === 'waterfall') base.payload = {categories:['Старт','Снижение','Рост'],series:[{name:'Изменение',values:[100,-20,30]}]};
+  if (template.kind === 'waterfall') base.payload = {categories:['Старт','Снижение','Рост'],series:[{name:'Изменение',values:[10,-20,15]}]};
   if (template.kind === 'gauge') base.payload = {categories:['Выполнение'],series:[{name:'Прогресс',values:[72]}]};
   if (template.profile === 'points') base.payload = {points:[{name:'Объект один',x:1,y:4,value:12},{name:'Объект два',x:3,y:2,value:18},{name:'Объект три',x:5,y:6,value:9}]};
   if (template.profile === 'matrix') base.payload = {matrix:{x:['Версия 1','Версия 2'],y:['Сегмент А','Сегмент Б'],values:[{x:'Версия 1',y:'Сегмент А',value:-4},{x:'Версия 2',y:'Сегмент А',value:-1},{x:'Версия 1',y:'Сегмент Б',value:3},{x:'Версия 2',y:'Сегмент Б',value:9}]}};
