@@ -2,9 +2,9 @@
 import {open, mkdir, rename, rm, readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {ROOT, loadCatalog, loadManifest, sha256Csp, sha256Hex, stableStringify} from './lib/core.mjs';
+import {ROOT, loadCatalog, loadManifest, sha256Hex, stableStringify} from './lib/core.mjs';
 import {validateSpec} from './lib/validation.mjs';
-import {validateOutputHtml} from './lib/output-validation.mjs';
+import {buildContentSecurityPolicy, validateOutputHtml} from './lib/output-validation.mjs';
 
 const FONT_NAMES = {
   inter:'Inter',
@@ -82,7 +82,7 @@ export async function buildHtml(spec) {
     const mapData = await trustedAsset(mapPath,manifest);
     mapBlock = `<script id="lieflat-map" type="application/octet-stream">${mapData.toString('base64')}</script>\n`;
   }
-  const csp = [`default-src 'none'`,`script-src 'sha256-${sha256Csp(echarts)}' 'sha256-${sha256Csp(runtime)}'`,`style-src 'unsafe-inline'`,`font-src data:`,`img-src data:`,`connect-src 'none'`,`object-src 'none'`,`frame-src 'none'`,`child-src 'none'`,`worker-src 'none'`,`media-src 'none'`,`form-action 'none'`,`base-uri 'none'`,`manifest-src 'none'`,`navigate-to 'none'`].join('; ');
+  const csp = buildContentSecurityPolicy(echarts,runtime);
   const html = `<!doctype html>\n<html lang="ru">\n<head>\n<meta charset="utf-8">\n<meta http-equiv="Content-Security-Policy" content="${csp}">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<meta name="referrer" content="no-referrer">\n<title>Lieflat Charts</title>\n<style>${css}</style>\n</head>\n<body>\n<div id="lieflat-root" class="page"><noscript>Для отображения графика требуется локальное выполнение JavaScript.</noscript></div>\n<script id="lieflat-data" type="application/octet-stream">${data}</script>\n${mapBlock}<script>${echarts}</script>\n<script>${runtime}</script>\n</body>\n</html>\n`;
   await validateOutputHtml(html);
   return html;

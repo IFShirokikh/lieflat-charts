@@ -9,6 +9,80 @@
     "version": {"const": 1},
     "templateId": {"type": "string", "pattern": "^(L([1-9]|1[0-9]|20)|F([1-9]|1[0-7])|G([1-9]|1[0-9]|2[0-2])|M[12]|B[123]|R(0[1-9]|1[0-2]))$"},
     "locale": {"const": "ru"},
+    "palette": {"$ref": "#/$defs/palette"},
+    "content": {"$ref": "#/$defs/content"},
+    "payload": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"templateId": {"enum": ["L1", "L2", "L3", "L11", "L15", "F1", "F2", "F3", "F5", "F6", "F7", "F14", "G1", "G3", "G5", "G8", "G10", "G12", "G16", "G17", "G18", "G21"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/seriesPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["L13", "L14", "F4", "F9", "F13", "G2", "G4", "G13"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/singleSeriesPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"const": "F11"}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/gaugePayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["L7", "L8", "L10", "L18", "F8", "F12", "G9", "G15"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/pointsPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["L4", "L9", "L16", "F10", "G14", "G20"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/matrixPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["L5", "L6", "L12", "G6", "G7", "G11", "G22", "B1", "B2", "B3"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/networkPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["L19", "F15", "G19"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/boxplotPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"const": "L20"}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/parallelPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"const": "F17"}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/ohlcPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"const": "L17"}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/calendarPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"const": "F16"}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/riverPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["M1", "M2"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/mapPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["R01", "R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/reportPayload"}}}
+    }
+  ],
+  "$defs": {
+    "text": {
+      "type": "string",
+      "maxLength": 5000,
+      "allOf": [
+        {"not": {"pattern": "<\\s*\\/?\\s*[A-Za-z!][^>]*>"}},
+        {"not": {"pattern": "[Oo][Nn][A-Za-z]+\\s*="}},
+        {"not": {"pattern": "(?:[Hh][Tt][Tt][Pp][Ss]?|[Ff][Tt][Pp]|[Ff][Ii][Ll][Ee]|[Dd][Aa][Tt][Aa]|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]|[Vv][Bb][Ss][Cc][Rr][Ii][Pp][Tt]|[Bb][Ll][Oo][Bb]|[Mm][Aa][Ii][Ll][Tt][Oo]|[Tt][Ee][Ll]):"}},
+        {"not": {"pattern": "(?:^|\\s)//[A-Za-z0-9]"}},
+        {"not": {"pattern": "[Ww][Ww][Ww]\\.[A-Za-z0-9]"}},
+        {"not": {"pattern": "[\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F\\u007F]"}}
+      ]
+    },
+    "number": {"type": "number", "minimum": -1000000000000000, "maximum": 1000000000000000},
+    "nonNegativeNumber": {"type": "number", "minimum": 0, "maximum": 1000000000000000},
+    "date": {"allOf": [{"$ref": "#/$defs/text"}, {"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "minLength": 10, "maxLength": 10}]},
     "palette": {
       "oneOf": [
         {"enum": ["mono", "palm", "porcelain", "wire"]},
@@ -28,14 +102,99 @@
       "additionalProperties": false,
       "required": ["title"],
       "properties": {
-        "title": {"type": "string", "minLength": 1, "maxLength": 240},
-        "subtitle": {"type": "string", "maxLength": 500},
-        "source": {"type": "string", "maxLength": 300},
-        "note": {"type": "string", "maxLength": 1000},
-        "eyebrow": {"type": "string", "maxLength": 120},
-        "period": {"type": "string", "maxLength": 120}
+        "title": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 240}]},
+        "subtitle": {"allOf": [{"$ref": "#/$defs/text"}, {"maxLength": 500}]},
+        "source": {"allOf": [{"$ref": "#/$defs/text"}, {"maxLength": 300}]},
+        "note": {"allOf": [{"$ref": "#/$defs/text"}, {"maxLength": 1000}]},
+        "eyebrow": {"allOf": [{"$ref": "#/$defs/text"}, {"maxLength": 120}]},
+        "period": {"allOf": [{"$ref": "#/$defs/text"}, {"maxLength": 120}]}
       }
     },
-    "payload": {"type": "object", "maxProperties": 12}
+    "category": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 160}]},
+    "categories": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"$ref": "#/$defs/category"}},
+    "seriesEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "values"],
+      "properties": {
+        "name": {"$ref": "#/$defs/category"},
+        "values": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"$ref": "#/$defs/number"}}
+      }
+    },
+    "seriesPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["categories", "series"],
+      "properties": {
+        "categories": {"$ref": "#/$defs/categories"},
+        "series": {"type": "array", "minItems": 1, "maxItems": 20, "items": {"$ref": "#/$defs/seriesEntry"}}
+      }
+    },
+    "singleSeriesPayload": {"allOf": [{"$ref": "#/$defs/seriesPayload"}, {"properties": {"series": {"maxItems": 1}}}]},
+    "gaugeSeriesEntry": {
+      "type": "object", "additionalProperties": false, "required": ["name", "values"],
+      "properties": {"name": {"$ref": "#/$defs/category"}, "values": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"type": "number", "minimum": 0, "maximum": 100}}}
+    },
+    "gaugePayload": {
+      "type": "object", "additionalProperties": false, "required": ["categories", "series"],
+      "properties": {"categories": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/category"}}, "series": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/gaugeSeriesEntry"}}}
+    },
+    "pointsPayload": {
+      "type": "object", "additionalProperties": false, "required": ["points"],
+      "properties": {"points": {"type": "array", "minItems": 1, "maxItems": 2000, "items": {"type": "object", "additionalProperties": false, "required": ["name", "x", "y"], "properties": {"name": {"$ref": "#/$defs/category"}, "x": {"$ref": "#/$defs/number"}, "y": {"$ref": "#/$defs/number"}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}}}
+    },
+    "matrixPayload": {
+      "type": "object", "additionalProperties": false, "required": ["matrix"],
+      "properties": {"matrix": {"type": "object", "additionalProperties": false, "required": ["x", "y", "values"], "properties": {
+        "x": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"$ref": "#/$defs/category"}},
+        "y": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"$ref": "#/$defs/category"}},
+        "values": {"type": "array", "minItems": 1, "maxItems": 5000, "items": {"type": "object", "additionalProperties": false, "required": ["x", "y", "value"], "properties": {"x": {"$ref": "#/$defs/category"}, "y": {"$ref": "#/$defs/category"}, "value": {"$ref": "#/$defs/number"}}}}
+      }}}
+    },
+    "networkPayload": {
+      "type": "object", "additionalProperties": false, "required": ["nodes", "links"],
+      "properties": {
+        "nodes": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"type": "object", "additionalProperties": false, "required": ["id", "name"], "properties": {"id": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "name": {"$ref": "#/$defs/category"}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}},
+        "links": {"type": "array", "minItems": 0, "maxItems": 2000, "items": {"type": "object", "additionalProperties": false, "required": ["source", "target"], "properties": {"source": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "target": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}}
+      }
+    },
+    "boxplotPayload": {
+      "type": "object", "additionalProperties": false, "required": ["categories", "boxes"],
+      "properties": {"categories": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"$ref": "#/$defs/category"}}, "boxes": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/number"}}}}
+    },
+    "parallelPayload": {
+      "type": "object", "additionalProperties": false, "required": ["dimensions", "rows"],
+      "properties": {
+        "dimensions": {"type": "array", "minItems": 3, "maxItems": 6, "items": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}},
+        "rows": {"type": "array", "minItems": 1, "maxItems": 200, "items": {"type": "object", "additionalProperties": false, "required": ["name", "values"], "properties": {"name": {"$ref": "#/$defs/category"}, "values": {"type": "array", "minItems": 3, "maxItems": 6, "items": {"$ref": "#/$defs/number"}}}}}
+      }
+    },
+    "ohlcPayload": {
+      "type": "object", "additionalProperties": false, "required": ["ohlc"],
+      "properties": {"ohlc": {"type": "array", "minItems": 1, "maxItems": 1000, "items": {"type": "object", "additionalProperties": false, "required": ["date", "open", "close", "low", "high"], "properties": {"date": {"$ref": "#/$defs/date"}, "open": {"$ref": "#/$defs/number"}, "close": {"$ref": "#/$defs/number"}, "low": {"$ref": "#/$defs/number"}, "high": {"$ref": "#/$defs/number"}}}}}
+    },
+    "calendarPayload": {
+      "type": "object", "additionalProperties": false, "required": ["calendar"],
+      "properties": {"calendar": {"type": "array", "minItems": 1, "maxItems": 732, "items": {"type": "object", "additionalProperties": false, "required": ["date", "value"], "properties": {"date": {"$ref": "#/$defs/date"}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}}}
+    },
+    "riverPayload": {
+      "type": "object", "additionalProperties": false, "required": ["river"],
+      "properties": {"river": {"type": "array", "minItems": 1, "maxItems": 5000, "items": {"type": "object", "additionalProperties": false, "required": ["date", "name", "value"], "properties": {"date": {"$ref": "#/$defs/date"}, "name": {"$ref": "#/$defs/category"}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}}}
+    },
+    "mapPayload": {
+      "type": "object", "additionalProperties": false, "required": ["regions"],
+      "properties": {"regions": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"type": "object", "additionalProperties": false, "required": ["name", "value"], "properties": {"name": {"$ref": "#/$defs/category"}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}}}
+    },
+    "reportPayload": {
+      "type": "object", "additionalProperties": false,
+      "anyOf": [{"required": ["kpis"]}, {"required": ["sections"]}, {"required": ["series"]}],
+      "dependentRequired": {"series": ["categories"]},
+      "properties": {
+        "kpis": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"type": "object", "additionalProperties": false, "required": ["label", "value"], "properties": {"label": {"$ref": "#/$defs/category"}, "value": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}}}},
+        "sections": {"type": "array", "minItems": 1, "maxItems": 12, "items": {"type": "object", "additionalProperties": false, "required": ["title", "text"], "properties": {"title": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 200}]}, "text": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 3000}]}}}},
+        "categories": {"$ref": "#/$defs/categories"},
+        "series": {"type": "array", "minItems": 1, "maxItems": 20, "items": {"$ref": "#/$defs/seriesEntry"}}
+      }
+    }
   }
 }

@@ -70,8 +70,8 @@ test('custom-палитра принимает только #RRGGBB', async () =
 
 test('валидатор замечает подмену runtime и CSP', async () => {
   const html = await buildHtml(sampleSpec((await loadCatalog()).get('F1')));
-  await assert.rejects(() => validateOutputHtml(html.replace('connect-src \'none\'','connect-src data:')),/connect-src/u);
-  await assert.rejects(() => validateOutputHtml(html.replace("'use strict';","'use strict';console.log('x');")),/хеш|рендерер/u);
+  await assert.rejects(() => validateOutputHtml(html.replace('connect-src \'none\'','connect-src data:')),/CSP/u);
+  await assert.rejects(() => validateOutputHtml(html.replace("'use strict';","'use strict';console.log('x');")),/CSP|хеш|рендерер/u);
 });
 
 test('CLI пишет результат атомарно и не оставляет файл при ошибке', async () => {

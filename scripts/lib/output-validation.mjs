@@ -29,17 +29,37 @@ function decodeBase64(value, label) {
   return Buffer.from(value,'base64');
 }
 
+export function buildContentSecurityPolicy(echarts, runtime) {
+  return [
+    `default-src 'none'`,
+    `script-src 'sha256-${sha256Csp(echarts)}' 'sha256-${sha256Csp(runtime)}'`,
+    `style-src 'unsafe-inline'`,
+    `font-src data:`,
+    `img-src data:`,
+    `connect-src 'none'`,
+    `object-src 'none'`,
+    `frame-src 'none'`,
+    `child-src 'none'`,
+    `worker-src 'none'`,
+    `media-src 'none'`,
+    `form-action 'none'`,
+    `base-uri 'none'`,
+    `manifest-src 'none'`,
+    `navigate-to 'none'`
+  ].join('; ');
+}
+
 export async function validateOutputHtml(html) {
   assert(typeof html === 'string' && html.startsWith('<!doctype html>'),'ожидался полный HTML5-документ');
   assert(/<html\s+lang="ru"/u.test(html),'не указан lang="ru"');
   const cspMatch = html.match(/<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]+)"\s*>/u);
   assert(cspMatch,'отсутствует CSP');
   const csp = cspMatch[1];
-  for (const directive of ["default-src 'none'","connect-src 'none'","object-src 'none'","frame-src 'none'","worker-src 'none'","form-action 'none'","base-uri 'none'"]) assert(csp.includes(directive),`в CSP отсутствует ${directive}`);
 
   const scripts = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gu)].map(match => ({attributes:match[1],body:match[2]}));
   const executable = scripts.filter(script => !/type="application\/octet-stream"/u.test(script.attributes));
   assert(executable.length === 2,'должно быть ровно два доверенных исполняемых скрипта');
+  assert(csp === buildContentSecurityPolicy(executable[0].body,executable[1].body),'CSP не совпадает с обязательной политикой');
   for (const script of executable) assert(csp.includes(`'sha256-${sha256Csp(script.body)}'`),'хеш исполняемого скрипта отсутствует в CSP');
 
   const manifest = await loadManifest();
@@ -70,6 +90,7 @@ export async function validateOutputHtml(html) {
   const withoutScripts = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gu,'');
   assert(!/(?:src|href)\s*=\s*["']\s*(?:https?:|\/\/|ftp:|file:)/iu.test(withoutScripts),'обнаружен внешний ресурс');
   assert(!/<(?:iframe|frame|object|embed|form|base|link)\b/iu.test(withoutScripts),'обнаружен запрещённый HTML-элемент');
+  assert(!/<meta\b[^>]*http-equiv\s*=\s*["']?refresh\b/iu.test(withoutScripts),'обнаружена навигация через meta refresh');
   assert(!/\son[a-z]+\s*=/iu.test(withoutScripts),'обнаружен инлайн-обработчик событий');
   assert(!/url\(\s*["']?(?!data:)/iu.test(withoutScripts),'CSS ссылается на внешний ресурс');
   assert(!/(?:https?|ftp|file):\/\//iu.test(withoutScripts),'обнаружен внешний URL');
