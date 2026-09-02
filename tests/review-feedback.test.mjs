@@ -135,6 +135,15 @@ test('runtime сохраняет семантику waterfall, heatmap и кал
   assert.equal(heatmap.visualMap.min,-100);
   assert.equal(heatmap.visualMap.max,9);
 
+  const constantSpec = sampleSpec(matrixTemplate);
+  constantSpec.payload.matrix.x = Array.from({length:8},(_,index) => `Столбец ${index + 1}`);
+  constantSpec.payload.matrix.y = Array.from({length:8},(_,index) => `Строка ${index + 1}`);
+  constantSpec.payload.matrix.values = constantSpec.payload.matrix.y.flatMap(y => constantSpec.payload.matrix.x.map(x => ({x,y,value:7})));
+  const constantHeatmap = (await captureOptions(constantSpec,matrixTemplate))[0];
+  assert.ok(constantHeatmap.visualMap.min < 7);
+  assert.ok(constantHeatmap.visualMap.max > 7);
+  assert.equal(constantHeatmap.series[0].label.show,false);
+
   const calendarTemplate = catalog.get('L17');
   const calendarSpec = sampleSpec(calendarTemplate);
   const calendar = (await captureOptions(calendarSpec,calendarTemplate))[0];
@@ -165,4 +174,7 @@ test('JSON Schema назначает строгий payload-профиль ка�
   const eventPattern = schema.$defs.text.allOf.map(rule => rule.not?.pattern).find(pattern => pattern?.includes('[Oo][Nn]'));
   assert.equal(new RegExp(eventPattern,'u').test('conversion=42'),false);
   assert.equal(new RegExp(eventPattern,'u').test('onerror=alert'),true);
+  const wwwPattern = schema.$defs.text.allOf.map(rule => rule.not?.pattern).find(pattern => pattern?.includes('[Ww][Ww][Ww]'));
+  assert.equal(new RegExp(wwwPattern,'u').test('showww.example'),false);
+  assert.equal(new RegExp(wwwPattern,'u').test('www.example'),true);
 });

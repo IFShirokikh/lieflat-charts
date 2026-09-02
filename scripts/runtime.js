@@ -139,9 +139,11 @@
     option.yAxis = {type:'category', data:matrix.y, splitArea:{show:true}, axisLabel:{color:palette.ink}};
     const values = matrix.values.map(item => [matrix.x.indexOf(item.x), matrix.y.indexOf(item.y), item.value]);
     const rawValues = values.map(item => item[2]);
-    const minimum = Math.min(...rawValues);
+    const rawMinimum = Math.min(...rawValues);
     const rawMaximum = Math.max(...rawValues);
-    const maximum = rawMaximum === minimum ? minimum + 1 : rawMaximum;
+    const padding = rawMaximum === rawMinimum ? Math.max(1,Math.abs(rawMinimum) * 0.01) : 0;
+    const minimum = rawMinimum - padding;
+    const maximum = rawMaximum + padding;
     option.visualMap = {min:minimum,max:maximum,calculable:false,orient:'horizontal',left:'center',bottom:0,inRange:{color:[palette.paper,...palette.colors.slice(0,3)]},textStyle:{color:palette.ink}};
     option.series = [{type:'heatmap',data:values,label:{show:values.length <= 60,color:palette.ink},emphasis:{itemStyle:{shadowBlur:8,shadowColor:palette.muted}}}];
     return option;
