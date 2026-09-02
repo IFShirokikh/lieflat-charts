@@ -35,8 +35,12 @@
       "then": {"properties": {"payload": {"$ref": "#/$defs/matrixPayload"}}}
     },
     {
-      "if": {"properties": {"templateId": {"enum": ["L5", "L6", "L12", "G6", "G7", "G11", "G22", "B1", "B2", "B3"]}}, "required": ["templateId"]},
+      "if": {"properties": {"templateId": {"enum": ["L5", "L6", "G6", "G7", "G11", "B1", "B2"]}}, "required": ["templateId"]},
       "then": {"properties": {"payload": {"$ref": "#/$defs/networkPayload"}}}
+    },
+    {
+      "if": {"properties": {"templateId": {"enum": ["L12", "G22", "B3"]}}, "required": ["templateId"]},
+      "then": {"properties": {"payload": {"$ref": "#/$defs/sankeyPayload"}}}
     },
     {
       "if": {"properties": {"templateId": {"enum": ["L19", "F15", "G19"]}}, "required": ["templateId"]},
@@ -156,6 +160,13 @@
       "properties": {
         "nodes": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"type": "object", "additionalProperties": false, "required": ["id", "name"], "properties": {"id": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "name": {"$ref": "#/$defs/category"}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}},
         "links": {"type": "array", "minItems": 0, "maxItems": 2000, "items": {"type": "object", "additionalProperties": false, "required": ["source", "target"], "properties": {"source": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "target": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}}
+      }
+    },
+    "sankeyPayload": {
+      "type": "object", "additionalProperties": false, "required": ["nodes", "links"],
+      "properties": {
+        "nodes": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"type": "object", "additionalProperties": false, "required": ["id", "name"], "properties": {"id": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "name": {"$ref": "#/$defs/category"}, "value": {"$ref": "#/$defs/nonNegativeNumber"}}}},
+        "links": {"type": "array", "minItems": 1, "maxItems": 2000, "items": {"type": "object", "additionalProperties": false, "required": ["source", "target"], "properties": {"source": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "target": {"allOf": [{"$ref": "#/$defs/text"}, {"minLength": 1, "maxLength": 120}]}, "value": {"type": "number", "exclusiveMinimum": 0, "maximum": 1000000000000000}}}}
       }
     },
     "boxplotPayload": {

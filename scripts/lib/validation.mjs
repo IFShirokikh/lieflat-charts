@@ -175,9 +175,13 @@ function validateNetwork(payload, template) {
     requiredKeys(item,['source','target'],`$.payload.links[${index}]`);
     if (!identifiers.has(item.source)) fail(`$.payload.links[${index}].source`,'узел не найден');
     if (!identifiers.has(item.target)) fail(`$.payload.links[${index}].target`,'узел не найден');
-    if (item.value !== undefined) number(item.value,`$.payload.links[${index}].value`,{minimum:0});
+    if (item.value !== undefined) {
+      number(item.value,`$.payload.links[${index}].value`,{minimum:0});
+      if (template?.kind === 'sankey' && item.value === 0) fail(`$.payload.links[${index}].value`,'поток Sankey должен быть больше нуля');
+    }
   });
   if (template?.kind === 'sankey') {
+    if (links.length === 0) fail('$.payload.links','для Sankey нужна хотя бы одна связь');
     const outgoing = new Map([...identifiers].map(id => [id,[]]));
     const indegree = new Map([...identifiers].map(id => [id,0]));
     for (const link of links) {

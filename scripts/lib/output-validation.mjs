@@ -1,5 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
+import {buildCanonicalHtml, buildContentSecurityPolicy} from './canonical-html.mjs';
 import {ROOT, loadCatalog, loadManifest, sha256Csp, sha256Hex, stableStringify} from './core.mjs';
 import {validateSpec} from './validation.mjs';
 
@@ -27,26 +28,6 @@ function assert(condition, message) {
 function decodeBase64(value, label) {
   assert(/^[A-Za-z0-9+/]*={0,2}$/.test(value),`${label} содержит не-Base64 данные`);
   return Buffer.from(value,'base64');
-}
-
-export function buildContentSecurityPolicy(echarts, runtime) {
-  return [
-    `default-src 'none'`,
-    `script-src 'sha256-${sha256Csp(echarts)}' 'sha256-${sha256Csp(runtime)}'`,
-    `style-src 'unsafe-inline'`,
-    `font-src data:`,
-    `img-src data:`,
-    `connect-src 'none'`,
-    `object-src 'none'`,
-    `frame-src 'none'`,
-    `child-src 'none'`,
-    `worker-src 'none'`,
-    `media-src 'none'`,
-    `form-action 'none'`,
-    `base-uri 'none'`,
-    `manifest-src 'none'`,
-    `navigate-to 'none'`
-  ].join('; ');
 }
 
 export async function validateOutputHtml(html) {
@@ -94,6 +75,9 @@ export async function validateOutputHtml(html) {
   } else {
     assert(!mapScript,'GeoJSON добавлен в шаблон, которому карта не нужна');
   }
+
+  const canonicalHtml = await buildCanonicalHtml(bundle.spec);
+  assert(html === canonicalHtml,'документ отличается от канонического результата компилятора');
 
   const withoutScripts = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gu,'');
   assert(!/(?:src|href)\s*=\s*["']\s*(?:https?:|\/\/|ftp:|file:)/iu.test(withoutScripts),'обнаружен внешний ресурс');

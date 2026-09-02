@@ -74,6 +74,13 @@ test('валидатор замечает подмену runtime и CSP', async 
   await assert.rejects(() => validateOutputHtml(html.replace("'use strict';","'use strict';console.log('x');")),/CSP|хеш|рендерер/u);
 });
 
+test('валидатор принимает только канонический HTML и отклоняет mixed-case script до CSP', async () => {
+  const html = await buildHtml(sampleSpec((await loadCatalog()).get('F1')));
+  const injected = html.replace('<head>','<head>\n<SCRIPT>document.documentElement.dataset.compromised="true"</SCRIPT>');
+  await assert.rejects(() => validateOutputHtml(injected),/канонического результата/u);
+  await assert.rejects(() => validateOutputHtml(html.replace('<body>','<body>\n<!-- постороннее изменение -->')),/канонического результата/u);
+});
+
 test('CLI пишет результат атомарно и не оставляет файл при ошибке', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(),'lieflat-cli-'));
   const input = path.join(directory,'input.json');

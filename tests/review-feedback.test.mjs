@@ -71,6 +71,19 @@ test('Sankey отклоняет циклы, а обычный граф их пр
   assert.doesNotThrow(() => validateSpec(graph,catalog));
 });
 
+test('Sankey требует положительный поток, а обычный граф допускает нулевой', async () => {
+  const catalog = await loadCatalog();
+  const sankey = sampleSpec(catalog.get('L12'));
+  sankey.payload.links[0].value = 0;
+  assert.throws(() => validateSpec(sankey,catalog),error => error instanceof SpecValidationError && /больше нуля/u.test(error.message));
+  const empty = sampleSpec(catalog.get('B3'));
+  empty.payload.links = [];
+  assert.throws(() => validateSpec(empty,catalog),error => error instanceof SpecValidationError && /хотя бы одна связь/u.test(error.message));
+  const graph = sampleSpec(catalog.get('L5'));
+  graph.payload.links[0].value = 0;
+  assert.doesNotThrow(() => validateSpec(graph,catalog));
+});
+
 test('одно-серийные шаблоны и gauge не отбрасывают принятые данные', async () => {
   const catalog = await loadCatalog();
   for (const id of ['L13','L14','F4','F9','F13','G2','G4','G13']) {
@@ -102,7 +115,7 @@ test('календарные даты существуют и диапазон �
   assert.throws(() => validateSpec(tooWide,catalog),SpecValidationError);
 });
 
-test('runtime сохраняет семантику waterfall, heatmap, Sankey и календаря', async () => {
+test('runtime сохраняет семантику waterfall, heatmap и календаря', async () => {
   const catalog = await loadCatalog();
   const waterfallTemplate = catalog.get('F9');
   const waterfall = (await captureOptions(sampleSpec(waterfallTemplate),waterfallTemplate))[0];
@@ -121,12 +134,6 @@ test('runtime сохраняет семантику waterfall, heatmap, Sankey �
   const heatmap = (await captureOptions(matrixSpec,matrixTemplate))[0];
   assert.equal(heatmap.visualMap.min,-100);
   assert.equal(heatmap.visualMap.max,9);
-
-  const sankeyTemplate = catalog.get('B3');
-  const sankeySpec = sampleSpec(sankeyTemplate);
-  sankeySpec.payload.links[0].value = 0;
-  const sankey = (await captureOptions(sankeySpec,sankeyTemplate))[0];
-  assert.equal(sankey.series[0].links[0].value,0);
 
   const calendarTemplate = catalog.get('L17');
   const calendarSpec = sampleSpec(calendarTemplate);
@@ -151,6 +158,9 @@ test('JSON Schema назначает строгий payload-профиль ка�
   assert.deepEqual([...assignments.keys()].sort(),[...catalog.keys()].sort());
   assert.equal(schema.$defs.seriesPayload.additionalProperties,false);
   assert.equal(schema.$defs.networkPayload.additionalProperties,false);
+  assert.equal(schema.$defs.sankeyPayload.additionalProperties,false);
+  assert.equal(schema.$defs.sankeyPayload.properties.links.minItems,1);
+  assert.equal(schema.$defs.sankeyPayload.properties.links.items.properties.value.exclusiveMinimum,0);
   assert.equal(schema.$defs.reportPayload.additionalProperties,false);
   const eventPattern = schema.$defs.text.allOf.map(rule => rule.not?.pattern).find(pattern => pattern?.includes('[Oo][Nn]'));
   assert.equal(new RegExp(eventPattern,'u').test('conversion=42'),false);

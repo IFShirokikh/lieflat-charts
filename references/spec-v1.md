@@ -29,7 +29,7 @@
 - `series`: `categories` и одна или несколько `series`; длины массивов совпадают. Круговые, воронкообразные, древовидные и waterfall-шаблоны принимают ровно один ряд. `F11` принимает ровно одно значение от 0 до 100.
 - `points`: `points` из объектов `{name, x, y, value?}`.
 - `matrix`: объект `matrix` с `x`, `y` и плоским массивом `values` из `{x, y, value}`.
-- `network`: `nodes` из `{id, name, value?}` и `links` из `{source, target, value?}`; ссылки должны указывать на существующие ID, а Sankey-связи — образовывать направленный ациклический граф.
+- `network`: `nodes` из `{id, name, value?}` и `links` из `{source, target, value?}`; ссылки должны указывать на существующие ID. Sankey требует хотя бы одну связь, только положительные значения потока и направленный ациклический граф.
 - `boxplot`: `categories` и `boxes` из пяти чисел `[min, q1, median, q3, max]`.
 - `parallel`: `dimensions` и `rows` из `{name, values}`.
 - `ohlc`: `ohlc` из `{date, open, close, low, high}`.
