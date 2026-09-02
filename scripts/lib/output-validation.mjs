@@ -1,5 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
+import {buildCanonicalHtml, buildContentSecurityPolicy} from './canonical-html.mjs';
 import {ROOT, loadCatalog, loadManifest, sha256Csp, sha256Hex, stableStringify} from './core.mjs';
 import {validateSpec} from './validation.mjs';
 
@@ -35,11 +36,19 @@ export async function validateOutputHtml(html) {
   const cspMatch = html.match(/<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]+)"\s*>/u);
   assert(cspMatch,'отсутствует CSP');
   const csp = cspMatch[1];
-  for (const directive of ["default-src 'none'","connect-src 'none'","object-src 'none'","frame-src 'none'","worker-src 'none'","form-action 'none'","base-uri 'none'"]) assert(csp.includes(directive),`в CSP отсутствует ${directive}`);
+  const metaTags = [...html.matchAll(/<meta\b[^>]*>/giu)].map(match => match[0]);
+  const expectedMetaTags = [
+    '<meta charset="utf-8">',
+    `<meta http-equiv="Content-Security-Policy" content="${csp}">`,
+    '<meta name="viewport" content="width=device-width,initial-scale=1">',
+    '<meta name="referrer" content="no-referrer">'
+  ];
+  assert(metaTags.length === expectedMetaTags.length && expectedMetaTags.every((tag,index) => metaTags[index] === tag),'набор meta-элементов не совпадает с обязательным');
 
   const scripts = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gu)].map(match => ({attributes:match[1],body:match[2]}));
   const executable = scripts.filter(script => !/type="application\/octet-stream"/u.test(script.attributes));
   assert(executable.length === 2,'должно быть ровно два доверенных исполняемых скрипта');
+  assert(csp === buildContentSecurityPolicy(executable[0].body,executable[1].body),'CSP не совпадает с обязательной политикой');
   for (const script of executable) assert(csp.includes(`'sha256-${sha256Csp(script.body)}'`),'хеш исполняемого скрипта отсутствует в CSP');
 
   const manifest = await loadManifest();
@@ -66,6 +75,9 @@ export async function validateOutputHtml(html) {
   } else {
     assert(!mapScript,'GeoJSON добавлен в шаблон, которому карта не нужна');
   }
+
+  const canonicalHtml = await buildCanonicalHtml(bundle.spec);
+  assert(html === canonicalHtml,'документ отличается от канонического результата компилятора');
 
   const withoutScripts = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gu,'');
   assert(!/(?:src|href)\s*=\s*["']\s*(?:https?:|\/\/|ftp:|file:)/iu.test(withoutScripts),'обнаружен внешний ресурс');

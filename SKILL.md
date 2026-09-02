@@ -18,7 +18,7 @@ description: Создаёт безопасные русскоязычные HTML
    node scripts/build-offline.mjs --spec input.json --out result.html
    ```
 
-5. Компилятор сам проверяет результат. Для повторной проверки запусти:
+5. Компилятор сам проверяет результат побайтовым сравнением с канонической сборкой. Для повторной проверки запусти:
 
    ```bash
    node scripts/validate-output.mjs result.html

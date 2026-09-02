@@ -109,17 +109,25 @@ function validatePalette(palette) {
   });
 }
 
-function validateSeries(payload, {optional = false} = {}) {
+function validateSeries(payload, templateOrOptions = {}) {
+  const optional = templateOrOptions.optional === true;
+  const template = templateOrOptions.id ? templateOrOptions : undefined;
   if (optional && payload.series === undefined) return;
   const categories = array(payload.categories,'$.payload.categories',1,500);
   categories.forEach((item,index) => string(item,`$.payload.categories[${index}]`,1,160));
-  array(payload.series,'$.payload.series',1,20).forEach((item,index) => {
+  const singleSeries = template && ['pie','funnel','treemap','waterfall','gauge'].includes(template.kind);
+  const series = array(payload.series,'$.payload.series',1,singleSeries ? 1 : 20);
+  series.forEach((item,index) => {
     allowedKeys(item,['name','values'],`$.payload.series[${index}]`);
     requiredKeys(item,['name','values'],`$.payload.series[${index}]`);
     string(item.name,`$.payload.series[${index}].name`,1,160);
     const values = array(item.values,`$.payload.series[${index}].values`,categories.length,categories.length);
     values.forEach((value,valueIndex) => number(value,`$.payload.series[${index}].values[${valueIndex}]`));
   });
+  if (template?.kind === 'gauge') {
+    if (categories.length !== 1 || series[0].values.length !== 1) fail('$.payload','шкала прогресса принимает одну категорию и одно значение');
+    number(series[0].values[0],'$.payload.series[0].values[0]',{minimum:0,maximum:100});
+  }
 }
 
 function validatePoints(payload) {
@@ -150,7 +158,7 @@ function validateMatrix(payload) {
   });
 }
 
-function validateNetwork(payload) {
+function validateNetwork(payload, template) {
   const identifiers = new Set();
   array(payload.nodes,'$.payload.nodes',1,500).forEach((item,index) => {
     allowedKeys(item,['id','name','value'],`$.payload.nodes[${index}]`);
@@ -161,13 +169,38 @@ function validateNetwork(payload) {
     identifiers.add(item.id);
     if (item.value !== undefined) number(item.value,`$.payload.nodes[${index}].value`,{minimum:0});
   });
-  array(payload.links,'$.payload.links',0,2000).forEach((item,index) => {
+  const links = array(payload.links,'$.payload.links',0,2000);
+  links.forEach((item,index) => {
     allowedKeys(item,['source','target','value'],`$.payload.links[${index}]`);
     requiredKeys(item,['source','target'],`$.payload.links[${index}]`);
     if (!identifiers.has(item.source)) fail(`$.payload.links[${index}].source`,'узел не найден');
     if (!identifiers.has(item.target)) fail(`$.payload.links[${index}].target`,'узел не найден');
-    if (item.value !== undefined) number(item.value,`$.payload.links[${index}].value`,{minimum:0});
+    if (item.value !== undefined) {
+      number(item.value,`$.payload.links[${index}].value`,{minimum:0});
+      if (template?.kind === 'sankey' && item.value === 0) fail(`$.payload.links[${index}].value`,'поток Sankey должен быть больше нуля');
+    }
   });
+  if (template?.kind === 'sankey') {
+    if (links.length === 0) fail('$.payload.links','для Sankey нужна хотя бы одна связь');
+    const outgoing = new Map([...identifiers].map(id => [id,[]]));
+    const indegree = new Map([...identifiers].map(id => [id,0]));
+    for (const link of links) {
+      outgoing.get(link.source).push(link.target);
+      indegree.set(link.target,indegree.get(link.target) + 1);
+    }
+    const queue = [...identifiers].filter(id => indegree.get(id) === 0);
+    let visited = 0;
+    while (queue.length) {
+      const source = queue.pop();
+      visited += 1;
+      for (const target of outgoing.get(source)) {
+        const next = indegree.get(target) - 1;
+        indegree.set(target,next);
+        if (next === 0) queue.push(target);
+      }
+    }
+    if (visited !== identifiers.size) fail('$.payload.links','Sankey-связи должны образовывать направленный ациклический граф');
+  }
 }
 
 function validateBoxes(payload) {
@@ -192,7 +225,14 @@ function validateParallel(payload) {
 
 function validDate(value, path) {
   string(value,path,10,10);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || Number.isNaN(Date.parse(`${value}T00:00:00Z`))) fail(path,'дата должна иметь формат YYYY-MM-DD');
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/u);
+  if (!match) fail(path,'дата должна иметь формат YYYY-MM-DD');
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const days = [31,leap ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+  if (month < 1 || month > 12 || day < 1 || day > days[month - 1]) fail(path,'указана несуществующая календарная дата');
 }
 
 function validateOhlc(payload) {
@@ -206,12 +246,17 @@ function validateOhlc(payload) {
 }
 
 function validateCalendar(payload) {
+  const dates = [];
   array(payload.calendar,'$.payload.calendar',1,732).forEach((item,index) => {
     allowedKeys(item,['date','value'],`$.payload.calendar[${index}]`);
     requiredKeys(item,['date','value'],`$.payload.calendar[${index}]`);
     validDate(item.date,`$.payload.calendar[${index}].date`);
+    dates.push(item.date);
     number(item.value,`$.payload.calendar[${index}].value`,{minimum:0});
   });
+  dates.sort();
+  const span = (Date.parse(`${dates.at(-1)}T00:00:00Z`) - Date.parse(`${dates[0]}T00:00:00Z`)) / 86400000;
+  if (span > 731) fail('$.payload.calendar','календарный диапазон не должен превышать 732 дня');
 }
 
 function validateRiver(payload) {
@@ -266,6 +311,6 @@ export function validateSpec(spec, catalog) {
   validateContent(spec.content);
   allowedKeys(spec.payload,PAYLOAD_KEYS,'$.payload');
   const validators = {series:validateSeries,points:validatePoints,matrix:validateMatrix,network:validateNetwork,boxplot:validateBoxes,parallel:validateParallel,ohlc:validateOhlc,calendar:validateCalendar,river:validateRiver,map:validateMap,report:validateReport};
-  validators[template.profile](spec.payload);
+  validators[template.profile](spec.payload,template);
   return template;
 }

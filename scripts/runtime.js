@@ -94,7 +94,30 @@
     option.legend = {bottom:0, textStyle:{color:palette.ink}};
     if (kind === 'area') option.series = seriesData(spec, 'line', {areaStyle:{opacity:0.24}, stack:null});
     else if (kind === 'bar-stacked') option.series = seriesData(spec, 'bar', {stack:'total', barMaxWidth:46});
-    else if (kind === 'waterfall') option.series = seriesData(spec, 'bar', {barMaxWidth:54});
+    else if (kind === 'waterfall') {
+      const source = spec.payload.series[0];
+      let cumulative = 0;
+      const changes = source.values.map((value,index) => {
+        const previous = cumulative;
+        cumulative += value;
+        return {name:spec.payload.categories[index],value:[spec.payload.categories[index],previous,cumulative,value]};
+      });
+      option.series = [{
+        name:source.name,
+        type:'custom',
+        dimensions:['Категория','Начало','Конец','Изменение'],
+        encode:{x:'Категория',y:['Начало','Конец'],tooltip:['Изменение'],itemName:'Категория'},
+        data:changes,
+        renderItem:(params,api) => {
+          const start = api.coord([api.value(0),api.value(1)]);
+          const end = api.coord([api.value(0),api.value(2)]);
+          const width = Math.min(54,api.size([1,0])[0] * 0.58);
+          const shape = echarts.graphic.clipRectByRect({x:start[0] - width / 2,y:Math.min(start[1],end[1]),width,height:Math.max(1,Math.abs(end[1] - start[1]))},params.coordSys);
+          if (!shape) return null;
+          return {type:'rect',shape,style:{fill:api.value(3) < 0 ? palette.colors[2] || palette.muted : palette.colors[0]}};
+        }
+      }];
+    }
     else if (kind === 'line') option.series = seriesData(spec, 'line');
     else option.series = seriesData(spec, 'bar', {barMaxWidth:54, borderRadius:[3,3,0,0]});
     return option;
@@ -115,8 +138,13 @@
     option.xAxis = {type:'category', data:matrix.x, splitArea:{show:true}, axisLabel:{color:palette.ink, interval:0}};
     option.yAxis = {type:'category', data:matrix.y, splitArea:{show:true}, axisLabel:{color:palette.ink}};
     const values = matrix.values.map(item => [matrix.x.indexOf(item.x), matrix.y.indexOf(item.y), item.value]);
-    const maximum = Math.max(1, ...values.map(item => item[2]));
-    option.visualMap = {min:0,max:maximum,calculable:false,orient:'horizontal',left:'center',bottom:0,inRange:{color:[palette.paper,...palette.colors.slice(0,3)]},textStyle:{color:palette.ink}};
+    const rawValues = values.map(item => item[2]);
+    const rawMinimum = Math.min(...rawValues);
+    const rawMaximum = Math.max(...rawValues);
+    const padding = rawMaximum === rawMinimum ? Math.max(1,Math.abs(rawMinimum) * 0.01) : 0;
+    const minimum = rawMinimum - padding;
+    const maximum = rawMaximum + padding;
+    option.visualMap = {min:minimum,max:maximum,calculable:false,orient:'horizontal',left:'center',bottom:0,inRange:{color:[palette.paper,...palette.colors.slice(0,3)]},textStyle:{color:palette.ink}};
     option.series = [{type:'heatmap',data:values,label:{show:values.length <= 60,color:palette.ink},emphasis:{itemStyle:{shadowBlur:8,shadowColor:palette.muted}}}];
     return option;
   }
@@ -124,7 +152,7 @@
   function buildNetworkOption(spec, template, palette) {
     const option = baseOption(spec, palette);
     if (template.kind === 'sankey') {
-      option.series = [{type:'sankey', data:spec.payload.nodes.map(node => ({name:node.id, value:node.value, label:{formatter:node.name}})), links:spec.payload.links.map(link => ({source:link.source,target:link.target,value:link.value || 1})), nodeWidth:10, nodeGap:14, draggable:false, emphasis:{focus:'adjacency'}, lineStyle:{color:'gradient',curveness:0.5,opacity:0.45}, label:{color:palette.ink}}];
+      option.series = [{type:'sankey', data:spec.payload.nodes.map(node => ({name:node.id, value:node.value, label:{formatter:node.name}})), links:spec.payload.links.map(link => ({source:link.source,target:link.target,value:link.value ?? 1})), nodeWidth:10, nodeGap:14, draggable:false, emphasis:{focus:'adjacency'}, lineStyle:{color:'gradient',curveness:0.5,opacity:0.45}, label:{color:palette.ink}}];
       return option;
     }
     option.series = [{type:'graph', layout:template.kind === 'graph-circular' ? 'circular' : 'force', circular:{rotateLabel:true}, force:{repulsion:170,edgeLength:[50,130]}, roam:true, draggable:true, data:spec.payload.nodes.map(node => ({id:node.id,name:node.name,value:node.value,symbolSize:Math.max(12,Math.min(46,12 + Number(node.value || 1)))})), links:spec.payload.links, label:{show:spec.payload.nodes.length <= 35,color:palette.ink}, lineStyle:{color:palette.muted,curveness:0.12,opacity:0.55}, emphasis:{focus:'adjacency'}}];
@@ -157,9 +185,10 @@
   function buildCalendarOption(spec, palette) {
     const option = baseOption(spec, palette);
     const values = spec.payload.calendar.map(item => [item.date,item.value]);
-    const year = values[0][0].slice(0,4);
+    const dates = values.map(item => item[0]).sort();
+    const range = dates[0].slice(0,4) === dates.at(-1).slice(0,4) ? dates[0].slice(0,4) : [dates[0],dates.at(-1)];
     option.visualMap = {min:0,max:Math.max(1,...values.map(item => item[1])),show:false,inRange:{color:[palette.paper,...palette.colors.slice(0,3)]}};
-    option.calendar = {range:year,cellSize:['auto',18],itemStyle:{borderWidth:2,borderColor:palette.paper},yearLabel:{color:palette.ink},dayLabel:{color:palette.muted,nameMap:['Вс','Пн','Вт','Ср','Чт','Пт','Сб']},monthLabel:{color:palette.muted,nameMap:['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']}};
+    option.calendar = {range,cellSize:['auto',18],itemStyle:{borderWidth:2,borderColor:palette.paper},yearLabel:{color:palette.ink},dayLabel:{color:palette.muted,nameMap:['Вс','Пн','Вт','Ср','Чт','Пт','Сб']},monthLabel:{color:palette.muted,nameMap:['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']}};
     option.series = [{type:'heatmap',coordinateSystem:'calendar',data:values}];
     return option;
   }
