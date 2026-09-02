@@ -36,7 +36,12 @@ function waitForDebugger(child) {
       const match = buffer.match(/DevTools listening on (ws:\/\/[^\s]+)/u);
       if (match) { clearTimeout(timer); resolve(match[1]); }
     });
-    child.once('exit',code => { clearTimeout(timer); reject(new Error(`Chrome завершился с кодом ${code}`)); });
+    child.once('error',error => { clearTimeout(timer); reject(new Error(`Не удалось запустить Chrome: ${error.code || 'ошибка запуска'}`)); });
+    child.once('exit',(code,signal) => {
+      clearTimeout(timer);
+      const reason = code === null ? `сигналом ${signal || 'неизвестно'}` : `с кодом ${code}`;
+      reject(new Error(`Chrome завершился ${reason}`));
+    });
   });
 }
 
@@ -60,10 +65,17 @@ class Cdp {
     });
   }
 
-  send(method, params = {}, sessionId) {
+  send(method, params = {}, sessionId, timeout = 15000) {
     const id = ++this.sequence;
     return new Promise((resolve,reject) => {
-      this.pending.set(id,{resolve,reject});
+      const timer = setTimeout(() => {
+        this.pending.delete(id);
+        reject(new Error(`Не дождались ответа CDP на ${method}`));
+      },timeout);
+      this.pending.set(id,{
+        resolve:value => { clearTimeout(timer); resolve(value); },
+        reject:error => { clearTimeout(timer); reject(error); }
+      });
       this.socket.send(JSON.stringify({id,method,params,...(sessionId ? {sessionId} : {})}));
     });
   }
@@ -94,7 +106,7 @@ async function connect(url) {
 }
 
 async function stopChrome(child) {
-  if (child.exitCode !== null) return;
+  if (child.exitCode !== null || child.signalCode !== null) return;
   const exited = new Promise(resolve => child.once('exit',resolve));
   child.kill('SIGTERM');
   const graceful = await Promise.race([exited.then(() => true),new Promise(resolve => setTimeout(() => resolve(false),2000))]);
@@ -151,25 +163,27 @@ async function main() {
   files.push({template:attackTemplate,file:attackFile,attack:true});
 
   const child = spawn(chromePath,['--headless=new','--disable-gpu','--disable-extensions','--disable-background-networking','--disable-component-update','--no-first-run','--no-default-browser-check','--remote-debugging-port=0',`--user-data-dir=${profileDir}`,'about:blank'],{stdio:['ignore','ignore','pipe']});
-  const debuggerUrl = await waitForDebugger(child);
-  const cdp = await connect(debuggerUrl);
-  const target = await cdp.send('Target.createTarget',{url:'about:blank'});
-  const attached = await cdp.send('Target.attachToTarget',{targetId:target.targetId,flatten:true});
-  const sessionId = attached.sessionId;
-  await cdp.send('Page.enable',{},sessionId);
-  await cdp.send('Runtime.enable',{},sessionId);
-  await cdp.send('Network.enable',{},sessionId);
-  await cdp.send('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false},sessionId);
-  let requests = [];
-  let exceptions = [];
-  const stopEvents = cdp.on(message => {
-    if (message.sessionId !== sessionId) return;
-    if (message.method === 'Network.requestWillBeSent') requests.push(message.params.request.url);
-    if (message.method === 'Runtime.exceptionThrown') exceptions.push(message.params.exceptionDetails.text || 'исключение');
-  });
-
+  let cdp;
+  let stopEvents = () => {};
   const capturedProfiles = new Set();
   try {
+    const debuggerUrl = await waitForDebugger(child);
+    cdp = await connect(debuggerUrl);
+    const target = await cdp.send('Target.createTarget',{url:'about:blank'});
+    const attached = await cdp.send('Target.attachToTarget',{targetId:target.targetId,flatten:true});
+    const sessionId = attached.sessionId;
+    await cdp.send('Page.enable',{},sessionId);
+    await cdp.send('Runtime.enable',{},sessionId);
+    await cdp.send('Network.enable',{},sessionId);
+    await cdp.send('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false},sessionId);
+    let requests = [];
+    let exceptions = [];
+    stopEvents = cdp.on(message => {
+      if (message.sessionId !== sessionId) return;
+      if (message.method === 'Network.requestWillBeSent') requests.push(message.params.request.url);
+      if (message.method === 'Runtime.exceptionThrown') exceptions.push(message.params.exceptionDetails.text || 'исключение');
+    });
+
     for (const {template,file,attack = false} of files) {
       requests = [];
       exceptions = [];
@@ -201,8 +215,10 @@ async function main() {
     process.stdout.write(`Проверено в браузере: ${files.length - 1} шаблонов и XSS-сценарий, сетевых запросов нет. Контрольные снимки: ${path.relative(ROOT,snapshots)}\n`);
   } finally {
     stopEvents();
-    await Promise.race([cdp.send('Browser.close').catch(() => {}),new Promise(resolve => setTimeout(resolve,1000))]);
-    cdp.socket.close();
+    if (cdp) {
+      await Promise.race([cdp.send('Browser.close',{},undefined,1000).catch(() => {}),new Promise(resolve => setTimeout(resolve,1000))]);
+      cdp.socket.close();
+    }
     await stopChrome(child);
     await rm(temporary,{recursive:true,force:true});
   }
